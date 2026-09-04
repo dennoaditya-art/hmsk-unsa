@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Code2, Cpu, Server, Sparkles, Terminal, Wrench, Globe, Zap } from "lucide-react";
 import { Spotlight } from "@/components/ui/spotlight";
 
@@ -17,7 +18,7 @@ export function Hero() {
       <div className="pointer-events-none absolute -bottom-24 -left-24 h-[420px] w-[540px] rounded-full bg-gradient-to-tr from-slate-200/60 to-transparent blur-3xl" />
       <Spotlight />
 
-      <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 pt-28 pb-10 lg:pt-36 lg:pb-12">
+      <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 pt-24 pb-10 sm:pt-28 lg:pt-36 lg:pb-12">
         <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-8">
           {/* LEFT */}
           <div className="lg:col-span-7">
@@ -29,10 +30,10 @@ export function Hero() {
               </span>
             </div>
 
-            <h1 className="display mt-6 text-[42px] font-bold leading-[0.88] tracking-[-0.05em] text-[#0f1f3c] sm:text-[56px] lg:text-[68px]">
+            <h1 className="display mt-6 text-[34px] font-bold leading-[0.88] tracking-[-0.05em] text-[#0f1f3c] sm:text-[42px] lg:text-[68px]">
               <span className="block">Himpunan</span>
               <span className="gradient-text block">Sistem Komputer</span>
-              <span className="text-[26px] sm:text-[34px] lg:text-[38px] font-semibold tracking-tight text-slate-500 block">Universitas Surakarta</span>
+              <span className="text-[20px] sm:text-[26px] lg:text-[38px] font-semibold tracking-tight text-slate-500 block">Universitas Surakarta</span>
             </h1>
 
             <p className="mt-5 max-w-xl text-[16px] leading-7 text-slate-600 text-balance">
@@ -42,14 +43,14 @@ export function Hero() {
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
                 href="/proker"
-                className="group/btn inline-flex items-center gap-2 rounded-full bg-[#0f1f3c] px-6 py-3.5 text-sm font-bold text-white shadow-[0_16px_30px_-14px_rgba(15,31,60,0.7)] hover:bg-[#1a2f5a] transition will-change-transform hover:[transform:translateY(-1px)]"
+                className="group/btn inline-flex w-full sm:w-auto justify-center items-center gap-2 rounded-full bg-[#0f1f3c] px-6 py-3.5 text-sm font-bold text-white shadow-[0_16px_30px_-14px_rgba(15,31,60,0.7)] hover:bg-[#1a2f5a] transition will-change-transform hover:[transform:translateY(-1px)] min-h-11"
               >
                 Lihat Proker Aktif
                 <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/15 group-hover/btn:bg-white group-hover/btn:text-[#0f1f3c] transition">
                   <ArrowRight className="h-3.5 w-3.5" />
                 </span>
               </Link>
-              <Link href="/struktur" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+              <Link href="/struktur" className="inline-flex w-full sm:w-auto justify-center items-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 min-h-11">
                 Kenalan Pengurus
               </Link>
               <div className="hidden sm:flex items-center gap-2 pl-2">
@@ -94,11 +95,13 @@ export function Hero() {
             <div className="relative rounded-[28px] border border-slate-200 bg-white p-2 shadow-[0_24px_60px_-20px_rgba(15,31,60,0.25)] hover:[transform:rotate(-0.3deg)] transition duration-500">
               {/* duotone photo bleed top */}
               <div className="relative h-[132px] overflow-hidden rounded-[18px] border border-slate-200">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80&auto=format&fit=crop"
                   alt="Hardware lab"
-                  className="h-full w-full object-cover grayscale contrast-125"
+                  fill
+                  priority
+                  sizes="(max-width: 640px) 100vw, 400px"
+                  className="object-cover grayscale contrast-125"
                 />
                 <div className="absolute inset-0 bg-gradient-to-br from-[#0f1f3c]/80 via-emerald-600/45 to-cyan-500/30 mix-blend-multiply" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0f1f3c] via-transparent to-transparent" />

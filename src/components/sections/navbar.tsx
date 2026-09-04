@@ -17,7 +17,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 border-b border-slate-200/60 bg-white/75 backdrop-blur-xl supports-[backdrop-filter]:bg-white/65">
+    <header className="fixed top-0 inset-x-0 z-50 border-b border-slate-200/60 bg-white/75 backdrop-blur-xl supports-[backdrop-filter]:bg-white/65 pt-[env(safe-area-inset-top)]">
       <nav className="mx-auto flex max-w-[1280px] items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative h-9 w-9 overflow-hidden rounded-xl bg-white ring-1 ring-slate-200 shadow-sm group-hover:ring-emerald-400/50 transition">
@@ -62,8 +62,8 @@ export function Navbar() {
         </div>
 
         <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white md:hidden hover:bg-slate-50">
-            <Menu className="h-4 w-4" />
+          <SheetTrigger className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white md:hidden hover:bg-slate-50 active:scale-95 transition" aria-label="Buka menu">
+            <Menu className="h-5 w-5" />
             <span className="sr-only">Buka menu</span>
           </SheetTrigger>
           <SheetContent side="right" className="w-[300px] bg-white">
@@ -80,9 +80,9 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-slate-700 hover:bg-slate-900 hover:text-white transition"
+                  className="flex items-center gap-3 rounded-xl px-3 py-3.5 text-sm font-medium text-slate-700 hover:bg-slate-900 hover:text-white transition min-h-11"
                 >
-                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-600 group-hover:bg-white/10">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-slate-600 group-hover:bg-white/10 shrink-0">
                     <link.icon className="h-4 w-4" />
                   </span>
                   {link.label}
@@ -94,7 +94,7 @@ export function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-center gap-2 rounded-full bg-[#0f1f3c] px-4 py-3 text-sm font-bold text-white"
+                className="flex items-center justify-center gap-2 rounded-full bg-[#0f1f3c] px-4 py-3.5 text-sm font-bold text-white min-h-11"
               >
                 Gabung HMSK <ArrowUpRight className="h-4 w-4" />
               </a>
