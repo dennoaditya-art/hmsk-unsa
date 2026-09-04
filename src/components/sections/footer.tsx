@@ -53,7 +53,7 @@ export function Footer() {
             <h3 className="mono text-[11px] tracking-[0.18em] text-white/50">NAVIGASI</h3>
             <div className="mt-4 flex flex-col gap-2.5">
               <Link href="/" className="text-sm text-white/70 hover:text-white">Beranda</Link>
-              <Link href="/#proker" className="text-sm text-white/70 hover:text-white">Proker</Link>
+              <Link href="/proker" className="text-sm text-white/70 hover:text-white">Proker</Link>
               <Link href="/struktur" className="text-sm text-white/70 hover:text-white">Struktur Pengurus</Link>
               <Link href="/tentang" className="text-sm text-white/70 hover:text-white">Tentang Kami</Link>
             </div>
@@ -66,7 +66,7 @@ export function Footer() {
               <span className="text-white/70">• LaptopCare Lab</span>
               <span className="text-white/60">• Hosting & Undangan (Segera)</span>
             </div>
-            <Link href="/#proker" className="mt-4 inline-flex items-center gap-1 mono text-xs font-bold tracking-widest text-emerald-300 hover:text-white">
+            <Link href="/proker" className="mt-4 inline-flex items-center gap-1 mono text-xs font-bold tracking-widest text-emerald-300 hover:text-white">
               LIHAT SEMUA <ArrowUpRight className="h-3 w-3" />
             </Link>
           </div>

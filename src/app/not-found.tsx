@@ -17,7 +17,7 @@ export default function NotFound() {
           <Link href="/" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0f1f3c] px-6 py-3 text-sm font-bold text-white hover:bg-[#1a2f5a]">
             <Home className="h-4 w-4" /> Kembali ke Beranda
           </Link>
-          <Link href="/#proker" className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+          <Link href="/proker" className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">
             <ArrowLeft className="h-4 w-4" /> Lihat Proker
           </Link>
         </div>

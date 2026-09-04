@@ -96,7 +96,7 @@ export default function StructurePage() {
               >
                 Gabung WA Grup
               </a>
-              <Link href="/#proker" className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-6 py-3 text-sm font-bold text-white hover:bg-white/15">
+              <Link href="/proker" className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-6 py-3 text-sm font-bold text-white hover:bg-white/15">
                 Lihat Proker
               </Link>
             </div>

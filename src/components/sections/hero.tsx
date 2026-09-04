@@ -41,7 +41,7 @@ export function Hero() {
 
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
-                href="/#proker"
+                href="/proker"
                 className="group/btn inline-flex items-center gap-2 rounded-full bg-[#0f1f3c] px-6 py-3.5 text-sm font-bold text-white shadow-[0_16px_30px_-14px_rgba(15,31,60,0.7)] hover:bg-[#1a2f5a] transition will-change-transform hover:[transform:translateY(-1px)]"
               >
                 Lihat Proker Aktif

@@ -8,8 +8,8 @@ import { Separator } from "@/components/ui/separator";
 
 const links = [
   { href: "/", label: "Beranda", icon: Home },
-  { href: "/#tentang", label: "Tentang", icon: Info },
-  { href: "/#proker", label: "Proker", icon: Sparkles },
+  { href: "/tentang", label: "Tentang", icon: Info },
+  { href: "/proker", label: "Proker", icon: Sparkles },
   { href: "/struktur", label: "Struktur", icon: Users },
 ];
 
@@ -45,7 +45,7 @@ export function Navbar() {
 
         <div className="hidden md:flex items-center gap-2">
           <Link
-            href="/#proker"
+            href="/proker"
             className="hidden lg:inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50"
           >
             Lihat Proker
