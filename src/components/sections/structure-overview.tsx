@@ -36,8 +36,10 @@ export function StructureOverview() {
             <div className="flex justify-center mt-4">
               <div className="h-6 w-[2px] bg-[#0f1f3c]/15 rounded-full" />
             </div>
-            <div className="h-[2px] bg-[#0f1f3c]/15 w-full max-w-[640px] mx-auto rounded-full" />
           </div>
+
+          {/* horizontal connector — hidden on mobile, spans 4 card centers */}
+          <div className="hidden lg:block h-[2px] bg-[#0f1f3c]/15 w-full max-w-[880px] mx-auto rounded-full" />
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
             {pengurus.map((leader) => (
