@@ -34,15 +34,15 @@ export function StructureOverview() {
             </div>
             <LeaderCard leader={ketua} variant="ketua" />
             <div className="flex justify-center mt-4">
-              <div className="h-6 w-px bg-slate-300" />
+              <div className="h-6 w-[2px] bg-[#0f1f3c]/15 rounded-full" />
             </div>
-            <div className="h-px bg-slate-300 w-full max-w-[520px] mx-auto" />
+            <div className="h-[2px] bg-[#0f1f3c]/15 w-full max-w-[640px] mx-auto rounded-full" />
           </div>
 
-          <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
             {pengurus.map((leader) => (
               <div key={leader.name} className="relative">
-                <div className="hidden lg:block absolute -top-6 left-1/2 h-6 w-px bg-slate-300 -translate-x-1/2" />
+                <div className="hidden lg:block absolute -top-6 left-1/2 h-6 w-[2px] bg-[#0f1f3c]/15 -translate-x-1/2 rounded-full" />
                 <LeaderCard leader={leader} />
               </div>
             ))}
@@ -58,7 +58,7 @@ export function StructureOverview() {
           </Link>
         </div>
 
-        <p className="mono text-center text-[11px] tracking-widest text-slate-400 mt-6">4 PENGURUS INTI • 3 PROKER AKTIF • 1 VISI</p>
+        <p className="mono text-center text-[11px] tracking-widest text-slate-400 mt-6">5 PENGURUS INTI • 3 PROKER AKTIF • 1 VISI</p>
       </div>
     </section>
   );

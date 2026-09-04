@@ -27,7 +27,7 @@ export default function StructurePage() {
             </div>
             <div className="rounded-2xl bg-white text-[#0f1f3c] px-5 py-4 lg:text-right">
               <p className="mono text-[11px] tracking-widest text-slate-500">TOTAL PENGURUS</p>
-              <p className="display text-2xl font-bold">4 Orang Inti</p>
+              <p className="display text-2xl font-bold">5 Orang Inti</p>
               <p className="mono text-xs text-slate-500">3 Proker Aktif • Universitas Surakarta</p>
             </div>
           </div>

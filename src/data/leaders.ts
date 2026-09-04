@@ -47,6 +47,15 @@ export const leaders: Leader[] = [
     accent: "violet",
     proker: "LaptopCare Lab",
   },
+  {
+    name: "Petrus",
+    role: "Divisi Rumah Tangga",
+    shortRole: "Rumah Tangga",
+    description: "Mengelola inventaris, logistik, dan kebutuhan rumah tangga HMSK — kebersihan, konsumsi, dan perlengkapan kegiatan.",
+    color: "from-slate-700 via-slate-800 to-slate-900",
+    accent: "slate",
+    proker: "Rumah Tangga",
+  },
 ];
 
 export const orgProfile = {
