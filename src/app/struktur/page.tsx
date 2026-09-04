@@ -40,8 +40,13 @@ export default function StructurePage() {
             <Card key={leader.name} className={idx === 0 ? "md:col-span-2 border-amber-200 bg-gradient-to-br from-amber-50/60 to-white" : "border-slate-200 bg-white"}>
               <CardContent className="p-6 sm:p-8">
                 <div className="flex flex-col sm:flex-row gap-6">
-                  <div className={`flex h-20 w-20 sm:h-24 sm:w-24 shrink-0 items-center justify-center rounded-[20px] bg-gradient-to-br ${leader.color} text-white text-2xl font-bold shadow-lg`}>
-                    {leader.name.charAt(0)}
+                  <div className={`flex h-20 w-20 sm:h-24 sm:w-24 shrink-0 items-center justify-center rounded-[20px] overflow-hidden shadow-lg ${leader.image ? "bg-white" : `bg-gradient-to-br ${leader.color} text-white text-2xl font-bold`}`}>
+                    {leader.image ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={leader.image} alt={leader.name} className="h-full w-full object-cover" />
+                    ) : (
+                      leader.name.charAt(0)
+                    )}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-2">

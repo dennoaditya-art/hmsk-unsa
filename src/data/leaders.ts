@@ -6,6 +6,7 @@ export interface Leader {
   color: string;
   accent: string;
   proker?: string;
+  image?: string;
 }
 
 export const leaders: Leader[] = [
@@ -17,6 +18,7 @@ export const leaders: Leader[] = [
     color: "from-slate-900 via-slate-800 to-emerald-700",
     accent: "emerald",
     proker: "WebCraft Studio",
+    image: "/ketua.jpg",
   },
   {
     name: "Sandha",

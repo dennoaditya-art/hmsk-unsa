@@ -18,8 +18,13 @@ export function LeaderCard({ leader, variant = "default" }: { leader: Leader; va
       )}
       <div className="p-6">
         <div className="flex items-start justify-between gap-2">
-          <div className={cn("relative flex items-center justify-center rounded-2xl text-white font-bold shadow-md shrink-0", isKetua ? "h-14 w-14 text-[15px]" : "h-12 w-12 text-[13px]", `bg-gradient-to-br ${leader.color}`)}>
-            {leader.name.slice(0, 2).toUpperCase()}
+          <div className={cn("relative flex items-center justify-center rounded-2xl overflow-hidden shadow-md shrink-0", isKetua ? "h-14 w-14" : "h-12 w-12", !leader.image && `bg-gradient-to-br ${leader.color} text-white font-bold text-[13px]` )}>
+            {leader.image ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={leader.image} alt={leader.name} className="h-full w-full object-cover" />
+            ) : (
+              leader.name.slice(0, 2).toUpperCase()
+            )}
             <span className={cn("absolute -bottom-1 -right-1 flex items-center justify-center rounded-full border-2 border-white text-[10px]", isKetua ? "h-6 w-6 bg-amber-400 text-white" : "h-5 w-5 bg-emerald-500 text-white")}>
               {isKetua ? <Crown className="h-3 w-3" /> : "●"}
             </span>
