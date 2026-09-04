@@ -11,11 +11,19 @@ export function Hero() {
       <div className="absolute inset-0 grid-pattern opacity-55" />
       <div className="absolute inset-0 opacity-[0.035]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E")` }} />
       <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white" />
+      {/* Impilo line-art: faint lilac wireframe */}
+      <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="var(--color-lilac-mist)" strokeWidth="1" fill="none">
+          <rect x="12%" y="18%" width="22%" height="42%" rx="16" />
+          <circle cx="74%" cy="36%" r="78" />
+          <path d="M 38 68 L 58 88 L 74 68" />
+        </g>
+      </svg>
       {/* massive motif */}
       <div className="pointer-events-none absolute -top-6 left-1/2 -translate-x-1/2 select-none display text-[140px] sm:text-[180px] lg:text-[220px] font-bold leading-none tracking-[-0.06em] text-[#0f1f3c]/[0.04]">{`{ }`}</div>
-      {/* glows */}
-      <div className="pointer-events-none absolute -top-24 -right-24 h-[560px] w-[720px] rounded-full bg-gradient-to-br from-emerald-200/35 via-cyan-200/22 to-violet-200/18 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-24 -left-24 h-[420px] w-[540px] rounded-full bg-gradient-to-tr from-slate-200/60 to-transparent blur-3xl" />
+      {/* glows — Impilo midnight pulse */}
+      <div className="pointer-events-none absolute -top-24 -right-24 h-[560px] w-[720px] rounded-full bg-gradient-to-br from-[var(--color-iris-glow)]/22 via-[var(--color-clinical-cyan)]/14 to-[var(--color-mint-vital)]/10 blur-3xl impilo-pulse" />
+      <div className="pointer-events-none absolute -bottom-24 -left-24 h-[420px] w-[540px] rounded-full bg-gradient-to-tr from-[var(--color-iris-shadow)]/50 to-transparent blur-3xl impilo-pulse" style={{ animationDelay: "1.1s" }} />
       <Spotlight />
 
       <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 pt-24 pb-10 sm:pt-28 lg:pt-36 lg:pb-12">
@@ -32,8 +40,8 @@ export function Hero() {
 
             <h1 className="display mt-6 text-[34px] font-bold leading-[0.88] tracking-[-0.05em] text-[#0f1f3c] sm:text-[42px] lg:text-[68px]">
               <span className="block">Himpunan</span>
-              <span className="gradient-text block">Sistem Komputer</span>
-              <span className="text-[20px] sm:text-[26px] lg:text-[38px] font-semibold tracking-tight text-slate-500 block">Universitas Surakarta</span>
+              <span className="word-highlight">Sistem Komputer</span>
+              <span className="text-[20px] sm:text-[26px] lg:text-[38px] font-semibold tracking-tight text-slate-500 block mt-1">Universitas Surakarta</span>
             </h1>
 
             <p className="mt-5 max-w-xl text-[16px] leading-7 text-slate-600 text-balance">
@@ -43,7 +51,7 @@ export function Hero() {
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
                 href="/proker"
-                className="group/btn inline-flex w-full sm:w-auto justify-center items-center gap-2 rounded-full bg-[#0f1f3c] px-6 py-3.5 text-sm font-bold text-white shadow-[0_16px_30px_-14px_rgba(15,31,60,0.7)] hover:bg-[#1a2f5a] transition will-change-transform hover:[transform:translateY(-1px)] min-h-11"
+                className="group/btn inline-flex w-full sm:w-auto justify-center items-center gap-2 impilo-pill bg-[var(--color-iris-pulse)] px-6 py-3.5 text-sm font-bold text-white hover:bg-[var(--color-deep-iris)] transition min-h-11"
               >
                 Lihat Proker Aktif
                 <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/15 group-hover/btn:bg-white group-hover/btn:text-[#0f1f3c] transition">
@@ -90,9 +98,9 @@ export function Hero() {
             </div>
           </div>
 
-          {/* RIGHT - duotone + terminal */}
-          <div className="lg:col-span-5">
-            <div className="relative rounded-[28px] border border-slate-200 bg-white p-2 shadow-[0_24px_60px_-20px_rgba(15,31,60,0.25)] hover:[transform:rotate(-0.3deg)] transition duration-500">
+          {/* RIGHT - duotone + terminal — Impilo dark canvas card */}
+          <div className="lg:col-span-5 impilo-float">
+            <div className="relative rounded-[24px] impilo-card p-2 shadow-[0_0_40px_rgba(35,34,105,0.45)]">
               {/* duotone photo bleed top */}
               <div className="relative h-[132px] overflow-hidden rounded-[18px] border border-slate-200">
                 <Image
@@ -111,7 +119,7 @@ export function Hero() {
                 <img src="/logo/logo-main.jpg" alt="logo" className="absolute right-3 top-3 h-7 w-7 rounded-lg object-cover ring-1 ring-white/30 shadow" />
               </div>
 
-              <div className="rounded-[20px] bg-[#0f1f3c] overflow-hidden -mt-3 relative z-10 border border-white/10">
+              <div className="rounded-[20px] bg-[var(--color-iris-shadow)] overflow-hidden -mt-3 relative z-10 border border-[var(--color-iris-border)]">
                 <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/[0.03]">
                   <div className="flex items-center gap-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-red-400" />

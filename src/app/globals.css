@@ -19,6 +19,17 @@
     --font-mono: "JetBrains Mono", monospace;
     --navy: #0f1f3c;
     --navy-light: #1a2f5a;
+    /* Impilo tokens — midnight observatory */
+    --color-deep-iris: #16165c;
+    --color-iris-shadow: #232269;
+    --color-iris-glow: #403cd5;
+    --color-iris-pulse: #5350cc;
+    --color-iris-border: #4846c6;
+    --color-lilac-mist: #b1a6f6;
+    --color-clinical-cyan: #00b1ff;
+    --color-mint-vital: #00ffaa;
+    --color-teal-signal: #2ee9ff;
+    --color-pearl: #f4f4f6;
   }
 }
 
@@ -90,6 +101,52 @@ section { scroll-margin-top: 5rem; }
 
 .mono { font-family: var(--font-mono); }
 .display { font-family: var(--font-oswald); }
+
+/* Impilo motion — midnight observatory */
+@keyframes impilo-pulse {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.04); }
+}
+@keyframes impilo-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes impilo-dash {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 12; }
+}
+@keyframes impilo-cyan-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0,177,255,0.0); }
+  50% { box-shadow: 0 0 20px rgba(0,177,255,0.25), 0 0 40px rgba(0,255,170,0.12); }
+}
+.impilo-pulse { animation: impilo-pulse 3.2s cubic-bezier(0.4,0,0.2,1) infinite; }
+.impilo-float { animation: impilo-float 4.8s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .impilo-pulse, .impilo-float { animation: none; }
+}
+.word-highlight {
+  position: relative;
+  display: inline-block;
+  padding: 0 8px 2px;
+  margin: 0 -4px;
+  border: 1.5px dashed var(--color-clinical-cyan);
+  border-radius: 7px;
+  background: rgba(0,177,255,0.06);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.impilo-pill {
+  border-radius: 9999px !important;
+  box-shadow: 0 0 20px rgba(60,57,185,0.22);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.impilo-pill:hover { box-shadow: 0 0 28px rgba(60,57,185,0.36); transform: translateY(-1px); }
+.impilo-card {
+  background: var(--color-iris-shadow);
+  border: 1px solid var(--color-iris-border);
+  border-radius: 24px;
+}
+.impilo-glow-cyan { animation: impilo-cyan-glow 2.6s ease-in-out infinite; }
 
 .text-balance { text-wrap: balance; }
 
