@@ -102,6 +102,15 @@ section { scroll-margin-top: 5rem; }
 .mono { font-family: var(--font-mono); }
 .display { font-family: var(--font-oswald); }
 
+/* Impilo reveal — text rises from below (slow, clinical) */
+@keyframes reveal {
+  from { transform: translateY(28px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [class*="animate-[reveal"] { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
+
 /* Impilo motion — midnight observatory */
 @keyframes impilo-pulse {
   0%, 100% { opacity: 0.55; transform: scale(1); }

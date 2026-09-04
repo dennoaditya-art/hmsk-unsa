@@ -39,16 +39,24 @@ export function Hero() {
             </div>
 
             <h1 className="display mt-6 text-[34px] font-bold leading-[0.88] tracking-[-0.05em] text-[#0f1f3c] sm:text-[42px] lg:text-[68px]">
-              <span className="block">Himpunan</span>
-              <span className="word-highlight">Sistem Komputer</span>
-              <span className="text-[20px] sm:text-[26px] lg:text-[38px] font-semibold tracking-tight text-slate-500 block mt-1">Universitas Surakarta</span>
+              <span className="block overflow-hidden">
+                <span className="block animate-[reveal_0.7s_cubic-bezier(0.16,1,0.3,1)_0.08s_both]">Himpunan</span>
+              </span>
+              <span className="block overflow-hidden">
+                <span className="word-highlight inline-block animate-[reveal_0.7s_cubic-bezier(0.16,1,0.3,1)_0.18s_both]">Sistem Komputer</span>
+              </span>
+              <span className="block overflow-hidden mt-1">
+                <span className="block text-[20px] sm:text-[26px] lg:text-[38px] font-semibold tracking-tight text-slate-500 animate-[reveal_0.6s_cubic-bezier(0.16,1,0.3,1)_0.28s_both]">
+                  Universitas Surakarta
+                </span>
+              </span>
             </h1>
 
-            <p className="mt-5 max-w-xl text-[16px] leading-7 text-slate-600 text-balance">
+            <p className="mt-5 max-w-xl text-[16px] leading-7 text-slate-600 text-balance animate-[reveal_0.6s_cubic-bezier(0.16,1,0.3,1)_0.38s_both]">
               Bukan sekadar himpunan — ini <span className="font-semibold text-[#0f1f3c]">lab berkarya</span>. Belajar bikin website sampai jualan, servis laptop sampai buka jasa. Dibimbing langsung oleh senior.
             </p>
 
-            <div className="mt-7 flex flex-wrap items-center gap-3">
+            <div className="mt-7 flex flex-wrap items-center gap-3 animate-[reveal_0.6s_cubic-bezier(0.16,1,0.3,1)_0.48s_both]">
               <Link
                 href="/proker"
                 className="group/btn inline-flex w-full sm:w-auto justify-center items-center gap-2 impilo-pill bg-[var(--color-iris-pulse)] px-6 py-3.5 text-sm font-bold text-white hover:bg-[var(--color-deep-iris)] transition min-h-11"
