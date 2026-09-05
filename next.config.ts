@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react"],
   },
+  async redirects() {
+    return [{ source: "/structure", destination: "/struktur", permanent: true }];
+  },
 };
 
 export default nextConfig;
