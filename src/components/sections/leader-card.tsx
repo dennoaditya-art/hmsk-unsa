@@ -1,15 +1,19 @@
 import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Crown, Sparkles } from "lucide-react";
 import { Leader } from "@/data/leaders";
 import { cn } from "@/lib/utils";
 
 export function LeaderCard({ leader, variant = "default" }: { leader: Leader; variant?: "ketua" | "default" }) {
   const isKetua = variant === "ketua";
+  const shouldReduce = useReducedMotion();
 
   return (
-    <div
+    <motion.div
+      whileHover={shouldReduce ? undefined : { y: -6, rotate: isKetua ? 0.3 : -0.3 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className={cn(
-        "group relative overflow-hidden rounded-[24px] sm:rounded-[28px] border bg-card transition-all card-hover",
+        "group relative overflow-hidden rounded-[24px] sm:rounded-[28px] border bg-card transition-colors",
         isKetua ? "border-primary/30 shadow-[0_16px_32px_-12px_hsl(var(--primary)/0.22)]" : "border-border hover:border-primary/30"
       )}
     >
@@ -56,6 +60,6 @@ export function LeaderCard({ leader, variant = "default" }: { leader: Leader; va
           Lihat profil <ArrowUpRight className="h-3 w-3" />
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 }

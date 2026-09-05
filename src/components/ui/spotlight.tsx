@@ -8,12 +8,17 @@ export function Spotlight({ className = "" }: { className?: string }) {
   useEffect(() => {
     const el = ref.current?.parentElement;
     if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
     const onMove = (e: MouseEvent) => {
-      const r = el.getBoundingClientRect();
-      setPos({ x: e.clientX - r.left, y: e.clientY - r.top });
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const r = el.getBoundingClientRect();
+        setPos({ x: e.clientX - r.left, y: e.clientY - r.top });
+      });
     };
-    el.addEventListener("mousemove", onMove);
-    return () => el.removeEventListener("mousemove", onMove);
+    el.addEventListener("mousemove", onMove, { passive: true });
+    return () => { cancelAnimationFrame(raf); el.removeEventListener("mousemove", onMove); };
   }, []);
 
   return (
@@ -21,7 +26,7 @@ export function Spotlight({ className = "" }: { className?: string }) {
       ref={ref}
       className={`pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${className}`}
       style={{
-        background: `radial-gradient(520px circle at ${pos.x}px ${pos.y}px, rgba(197,162,84,0.14), transparent 70%)`,
+        background: `radial-gradient(520px circle at ${pos.x}px ${pos.y}px, oklch(0.546 0.215 262.881 / 0.13), transparent 70%)`,
       }}
     />
   );

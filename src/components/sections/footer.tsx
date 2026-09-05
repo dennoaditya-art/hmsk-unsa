@@ -1,10 +1,12 @@
+"use client";
+import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, ArrowUpRight, Sparkles } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="bg-[#020617] text-white border-t border-white/10">
+    <motion.footer initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="bg-[#020617] text-white border-t border-white/10">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
@@ -81,6 +83,6 @@ export function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }
