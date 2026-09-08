@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { haversine } from "@/lib/geo";
 import { getLokasiById, getKegiatan, getPresensi, addPresensi } from "@/lib/presensi-store";
+import { isValidAnggota } from "@/data/anggota";
 import { cookies, headers } from "next/headers";
 import fs from "fs";
 import path from "path";
@@ -42,9 +43,13 @@ export async function POST(req: Request) {
 
   const c = await cookies();
   const nim = c.get("hmsk_nim")?.value;
-  const nama = c.get("hmsk_nama")?.value || body.nama || nim || "Anonim";
+  const rawNama = (c.get("hmsk_nama")?.value || body.nama || "").trim();
+  const nama = rawNama;
 
   if (!nim) return NextResponse.json({ error: "Belum login. Isi NIM dulu." }, { status: 401 });
+  if (!nama || nama.length < 3) return NextResponse.json({ error: "Nama wajib (min 3 huruf)" }, { status: 400 });
+  if (nama.toLowerCase() === nim.toLowerCase()) return NextResponse.json({ error: "Nama tidak boleh sama dengan NIM" }, { status: 400 });
+  if (!isValidAnggota(nim, nama)) return NextResponse.json({ error: "NIM+Nama tidak cocok allowlist (identitas asli)" }, { status: 403 });
   if (typeof lat !== "number" || typeof lng !== "number" || Number.isNaN(lat) || Number.isNaN(lng))
     return NextResponse.json({ error: "Lokasi tidak valid" }, { status: 400 });
   if (lat < -90 || lat > 90 || lng < -180 || lng > 180)
