@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, Home, Users, Info, ArrowUpRight, Sparkles } from "lucide-react";
+import { Menu, Home, Users, Info, ArrowUpRight, Sparkles, MapPin } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const links = [
   { href: "/", label: "Beranda", icon: Home },
+  { href: "/presensi", label: "Presensi", icon: MapPin },
   { href: "/tentang", label: "Tentang", icon: Info },
   { href: "/proker", label: "Proker", icon: Sparkles },
   { href: "/struktur", label: "Struktur", icon: Users },

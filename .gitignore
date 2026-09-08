@@ -41,3 +41,8 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+# presensi data - file-store ephemereal, jangan commit
+/data/presensi.json
+/data/presensi-ditolak.json
+dev.log
+cookies.txt
