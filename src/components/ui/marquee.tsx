@@ -1,4 +1,4 @@
-export function Marquee({ text = "HMSK • WEBCRAFT • LAPTOPCARE • HOST & INVITE • UNSA • SISTEM KOMPUTER •" }: { text?: string }) {
+export function Marquee({ text = "HMSK • WEB CREATION • SOCMED-X • RE-BOOT • VITE • UNSA • SISTEM KOMPUTER •" }: { text?: string }) {
   const items = Array.from({ length: 8 }, () => text).join("  ");
   return (
     <div className="group relative overflow-hidden border-y border-border bg-[#020617] py-2.5">

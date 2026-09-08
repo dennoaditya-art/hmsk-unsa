@@ -1,5 +1,7 @@
 export interface Leader {
   name: string;
+  fullName?: string;
+  nim?: string;
   role: string;
   shortRole: string;
   description: string;
@@ -11,17 +13,21 @@ export interface Leader {
 
 export const leaders: Leader[] = [
   {
-    name: "Denno",
-    role: "Ketua Umum",
+    name: "Rossi Denno Aditya Arsenal",
+    fullName: "Rossi Denno Aditya Arsenal",
+    nim: "202023009",
+    role: "Ketua HMSK",
     shortRole: "Ketua",
-    description: "Memimpin seluruh kegiatan organisasi, menjadi perwakilan utama HMSK di forum kampus & eksternal. Pembina WebCraft Studio.",
+    description: "Memimpin seluruh kegiatan organisasi, menjadi perwakilan utama HMSK di forum kampus & eksternal. Pembina Web Creation & Fundamental Training.",
     color: "from-primary via-indigo-600 to-primary",
     accent: "primary",
-    proker: "WebCraft Studio",
+    proker: "Web Creation",
     image: "/ketua.jpg",
   },
   {
-    name: "Sandha",
+    name: "Sandha Anugrah Panorama",
+    fullName: "Sandha Anugrah Panorama",
+    nim: "202323008",
     role: "Sekretaris",
     shortRole: "Sekretaris",
     description: "Mengelola administrasi, notulensi rapat, dan koordinasi komunikasi internal antar pengurus & divisi.",
@@ -30,7 +36,9 @@ export const leaders: Leader[] = [
     proker: "Administrasi",
   },
   {
-    name: "Aisyah",
+    name: "'Aisyah Lu'lu'ul Rohmani",
+    fullName: "'Aisyah Lu'lu'ul Rohmani",
+    nim: "202323001",
     role: "Bendahara",
     shortRole: "Bendahara",
     description: "Mengelola keuangan, transparansi kas, dan pelaporan anggaran untuk seluruh proker HMSK.",
@@ -39,16 +47,20 @@ export const leaders: Leader[] = [
     proker: "Keuangan",
   },
   {
-    name: "Dicto",
+    name: "Een Vandicto Satya Ady",
+    fullName: "Een Vandicto Satya Ady",
+    nim: "202423004",
     role: "Perhubungan",
     shortRole: "Perhubungan",
-    description: "Menjalin kerja sama eksternal, publikasi & branding HMSK UNSA, serta pembina LaptopCare Lab — pelatihan hardware & service.",
+    description: "Menjalin kerja sama eksternal, publikasi & branding HMSK UNSA, serta pembina RE-BOOT — repair, optimize & overhaul training.",
     color: "from-primary via-violet-600 to-primary",
     accent: "primary",
-    proker: "LaptopCare Lab",
+    proker: "RE-BOOT",
   },
   {
-    name: "Petrus",
+    name: "Petrus Guiseppie Muji Pierantoni Foel",
+    fullName: "Petrus Guiseppie Muji Pierantoni Foel",
+    nim: "202323007",
     role: "Divisi Rumah Tangga",
     shortRole: "Rumah Tangga",
     description: "Mengelola inventaris, logistik, dan kebutuhan rumah tangga HMSK — kebersihan, konsumsi, dan perlengkapan kegiatan.",

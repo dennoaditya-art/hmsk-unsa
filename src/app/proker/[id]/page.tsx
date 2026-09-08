@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Sparkles, Clock3, Zap, Wrench, Globe, Server, Users, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, Sparkles, Clock3, Zap, Wrench, Globe, Server, Users, Check, Share2 } from "lucide-react";
 import { prokers } from "@/data/proker";
 
 export function generateStaticParams() {
@@ -11,6 +11,7 @@ const iconMap: Record<string, React.ReactNode> = {
   code: <Globe className="h-6 w-6" />,
   cpu: <Wrench className="h-6 w-6" />,
   server: <Server className="h-6 w-6" />,
+  share: <Share2 className="h-6 w-6" />,
 };
 
 export function generateMetadata({ params }: { params: { id: string } }) {
@@ -34,7 +35,7 @@ export default function ProkerDetail({ params }: { params: { id: string } }) {
         <div className="absolute inset-0 bg-primary/08" />
         <div className="absolute inset-0 grid-pattern-dark opacity-20" />
         <div className="absolute -right-20 -top-20 h-[420px] w-[600px] rounded-full bg-gradient-to-br from-primary/16 to-transparent blur-3xl" />
-        <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+        <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
           <Link href="/proker" className="inline-flex items-center gap-1.5 mono text-xs tracking-widest text-white/60 hover:text-white">
             <ArrowLeft className="h-3.5 w-3.5" /> KEMBALI KE PROKER
           </Link>
@@ -58,18 +59,19 @@ export default function ProkerDetail({ params }: { params: { id: string } }) {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-10 sm:py-14 bg-muted">
-        <div className="grid gap-6 lg:grid-cols-12">
-          <div className="lg:col-span-8 rounded-[28px] border border-border bg-card p-6 sm:p-8">
+      <section className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 bg-muted">
+        <div className="grid gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-8 rounded-[28px] border border-border bg-card p-7 sm:p-10">
             <h2 className="display text-xl font-bold tracking-tight text-foreground">Tentang Program</h2>
             <p className="mt-3 text-sm leading-7 text-muted-foreground">
-              {p.id === "webcraft" && "Kamu akan belajar dari nol: desain Figma, slicing Tailwind, Next.js, deploy, sampai teknik jualan ke UMKM. Setiap peserta wajib ship 1 website klien nyata sebagai portfolio."}
-              {p.id === "laptopcare" && "Pelatihan hardware hands-on: bongkar, cleaning, repasta, diagnosa kerusakan umum, hingga strategi buka jasa service di kampus. Cocok untuk yang suka ngoprek."}
-              {p.id === "hosting-undangan" && "Fokus deployment: domain, cPanel, hosting, SSL, serta pembuatan undangan digital berbasis link yang responsive dan mudah share via WA."}
+              {p.id === "web-creation" && "Kamu akan belajar dari nol: desain Figma, slicing Tailwind, Next.js, deploy, sampai teknik jualan ke UMKM. Setiap peserta wajib ship 1 website klien nyata sebagai portfolio."}
+              {p.id === "socmed-x" && "Pelatihan socmed hands-on: strategi konten, copywriting, desain feed, Meta Ads, dan analitik. Cocok untuk yang mau handle sosmed UMKM/brand dan jadi freelance social media specialist."}
+              {p.id === "re-boot" && "Pelatihan hardware hands-on: bongkar, cleaning, repasta, diagnosa kerusakan umum, hingga strategi buka jasa service di kampus. Cocok untuk yang suka ngoprek."}
+              {p.id === "vite" && "Fokus deployment & event tech: domain, cPanel, hosting, SSL, serta pembuatan undangan digital VITE yang responsive, RSVP online, dan manajemen tamu."}
             </p>
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {[
-                { t: "Output", d: p.id === "webcraft" ? "1 website klien live + portfolio" : p.id === "laptopcare" ? "Bisa buka jasa cleaning/service" : "Link undangan online siap share" },
+                { t: "Output", d: p.id === "web-creation" ? "1 website klien live + portfolio" : p.id === "socmed-x" ? "Portfolio socmed + campaign live" : p.id === "re-boot" ? "Bisa buka jasa cleaning/service" : "Link undangan VITE siap share" },
                 { t: "Durasi", d: p.status === "segera" ? "Akan diumumkan" : "4-6 minggu intensif" },
                 { t: "Level", d: "Pemula welcome" },
                 { t: "Sertifikat", d: "E-certificate HMSK" },

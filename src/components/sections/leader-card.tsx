@@ -39,8 +39,11 @@ export function LeaderCard({ leader, variant = "default" }: { leader: Leader; va
         </div>
 
         <div className="mt-4">
-          <h3 className={cn("font-bold tracking-tight text-foreground", isKetua ? "text-[20px]" : "text-[16px]")}>{leader.name}</h3>
+          <h3 className={cn("font-bold tracking-tight text-foreground leading-tight break-words", isKetua ? (leader.name.length > 24 ? "text-[16px]" : "text-[20px]") : leader.name.length > 28 ? "text-[13px]" : leader.name.length > 22 ? "text-[14px]" : "text-[16px]")}>{leader.name}</h3>
           <p className="mono text-[11px] tracking-widest text-muted-foreground">{leader.role}</p>
+          {leader.nim && (
+            <p className="mono text-[10px] font-bold tracking-[0.12em] text-foreground/60 mt-0.5">NIM {leader.nim}</p>
+          )}
           {leader.proker && (
             <span className="mt-2 inline-flex items-center gap-1 rounded-full bg-primary/12 border border-border px-2 py-1 mono text-[10px] font-semibold text-primary">
               <Sparkles className="h-3 w-3" /> {leader.proker}

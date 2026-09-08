@@ -1,14 +1,14 @@
 "use client";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone, ArrowUpRight, Sparkles } from "lucide-react";
+import { Mail, MapPin, ArrowUpRight, Sparkles } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 
 export function Footer() {
   return (
     <motion.footer initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="bg-[#020617] text-white border-t border-white/10">
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid gap-10 md:grid-cols-12">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20">
+        <div className="grid gap-10 md:gap-12 lg:gap-16 md:grid-cols-12">
           <div className="md:col-span-5">
             <Link href="/" className="flex items-center gap-3">
               <img src="/logo/logo-main.jpg" alt="HMSK UNSA" className="h-10 w-10 rounded-xl object-cover ring-1 ring-white/15" />
@@ -17,10 +17,10 @@ export function Footer() {
                 <p className="mono text-[11px] tracking-[0.16em] text-white/55">SISTEM KOMPUTER • UNSA</p>
               </div>
             </Link>
-            <p className="mt-4 max-w-sm text-sm leading-6 text-white/65">
+            <p className="mt-5 max-w-sm text-sm leading-7 text-white/65">
               Himpunan Mahasiswa Sistem Komputer Universitas Surakarta — lab berkarya: bikin website sampai jualan, service laptop sampai buka jasa.
             </p>
-            <div className="mt-5 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-3">
               <span className="inline-flex items-center gap-1 rounded-full bg-white/08 border border-white/10 px-3 py-1 mono text-[11px] font-semibold text-white">
                 <Sparkles className="h-3 w-3 text-primary" /> Proker Aktif
               </span>
@@ -37,12 +37,9 @@ export function Footer() {
 
           <div className="md:col-span-3">
             <h3 className="mono text-[11px] tracking-[0.18em] text-white/45">KONTAK</h3>
-            <div className="mt-4 flex flex-col gap-3">
-              <a href="mailto:info@hmsk-unsa.ac.id" className="flex items-center gap-2 text-sm text-white/65 hover:text-white transition">
-                <Mail className="h-4 w-4 text-primary" /> info@hmsk-unsa.ac.id
-              </a>
-              <a href="tel:+6281234567890" className="flex items-center gap-2 text-sm text-white/65 hover:text-white transition">
-                <Phone className="h-4 w-4 text-primary" /> +62 812-3456-7890
+            <div className="mt-5 flex flex-col gap-4">
+              <a href="mailto:hmskunsa@gmail.com" className="flex items-center gap-2 text-sm text-white/65 hover:text-white transition">
+                <Mail className="h-4 w-4 text-primary" /> hmskunsa@gmail.com
               </a>
               <div className="flex items-start gap-2 text-sm text-white/55">
                 <MapPin className="h-4 w-4 mt-0.5 text-primary" />
@@ -64,9 +61,10 @@ export function Footer() {
           <div className="md:col-span-2">
             <h3 className="mono text-[11px] tracking-[0.18em] text-white/45">PROKER</h3>
             <div className="mt-4 flex flex-col gap-2.5 text-sm">
-              <span className="text-white/65">• WebCraft Studio</span>
-              <span className="text-white/65">• LaptopCare Lab</span>
-              <span className="text-white/50">• Hosting & Undangan (Segera)</span>
+              <span className="text-white/65">• Web Creation</span>
+              <span className="text-white/65">• SOCMED-X</span>
+              <span className="text-white/65">• RE-BOOT</span>
+              <span className="text-white/50">• VITE (Segera)</span>
             </div>
             <Link href="/proker" className="mt-4 inline-flex items-center gap-1 mono text-xs font-bold tracking-widest text-primary hover:text-white">
               LIHAT SEMUA <ArrowUpRight className="h-3 w-3" />
@@ -74,9 +72,9 @@ export function Footer() {
           </div>
         </div>
 
-        <Separator className="my-8 bg-white/10" />
+        <Separator className="my-10 bg-white/10" />
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           <p className="mono text-xs tracking-wide text-white/45">© {new Date().getFullYear()} HMSK UNSA — Sistem Komputer UNSA. Dibina dengan praktek, bukan wacana.</p>
           <div className="flex items-center gap-2 mono text-xs text-white/35">
             <span className="h-2 w-2 rounded-full bg-primary animate-pulse" /> SYSTEM ONLINE

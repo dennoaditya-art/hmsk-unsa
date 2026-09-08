@@ -19,7 +19,7 @@ export function Navbar() {
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70 pt-[env(safe-area-inset-top)]">
-      <nav className="mx-auto flex max-w-[1280px] items-center justify-between px-3 sm:px-6 lg:px-8 py-3 sm:py-3.5">
+      <nav className="mx-auto flex max-w-[1280px] items-center justify-between px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4">
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative h-9 w-9 overflow-hidden rounded-xl bg-card ring-1 ring-border shadow-sm group-hover:ring-primary/30 transition">
             {/* eslint-disable-next-line @next/next/no-img-element */}

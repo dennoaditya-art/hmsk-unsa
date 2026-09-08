@@ -2,7 +2,7 @@ import { leaders, orgProfile } from "@/data/leaders";
 import { prokers } from "@/data/proker";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Mail, Phone, MapPin, ArrowLeft, Crown, Sparkles } from "lucide-react";
+import { Mail, MapPin, ArrowLeft, Crown, Sparkles } from "lucide-react";
 import Link from "next/link";
 
 export default function StructurePage() {
@@ -57,7 +57,10 @@ export default function StructurePage() {
                         </span>
                       )}
                     </div>
-                    <h2 className="display mt-3 text-2xl font-bold tracking-tight text-foreground">{leader.name}</h2>
+                    <h2 className={`display mt-3 font-bold tracking-tight text-foreground leading-tight break-words ${leader.name.length > 28 ? "text-xl sm:text-2xl" : leader.name.length > 22 ? "text-[22px] sm:text-2xl" : "text-2xl"}`}>{leader.name}</h2>
+                    {leader.nim && (
+                      <p className="mono text-[11px] font-bold tracking-widest text-primary mt-1">NIM {leader.nim}</p>
+                    )}
                     <p className="mt-2 text-sm leading-6 text-muted-foreground">{leader.description}</p>
 
                     {/* proker detail */}
@@ -69,12 +72,9 @@ export default function StructurePage() {
                     )}
 
                     <div className="mt-5 grid gap-2">
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Mail className="h-3.5 w-3.5 text-primary" /> {leader.name.toLowerCase()}@hmsk-unsa.ac.id
-                      </div>
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Phone className="h-3.5 w-3.5 text-primary" /> +62 812-3456-7890
-                      </div>
+                      <a href="mailto:hmskunsa@gmail.com" className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition">
+                        <Mail className="h-3.5 w-3.5 text-primary" /> hmskunsa@gmail.com
+                      </a>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
                         <MapPin className="h-3.5 w-3.5 text-primary" /> Universitas Surakarta, Jawa Tengah
                       </div>

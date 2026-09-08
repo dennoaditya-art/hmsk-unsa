@@ -29,11 +29,11 @@ export const metadata: Metadata = {
     default: "HMSK UNSA | Himpunan Mahasiswa Sistem Komputer Universitas Surakarta",
     template: "%s | HMSK UNSA",
   },
-  description: "Profil dan struktur pengurus Himpunan Mahasiswa Sistem Komputer Universitas Surakarta — lab berkarya web & hardware, 3 proker aktif dibina mentor.",
+  description: "Profil dan struktur pengurus Himpunan Mahasiswa Sistem Komputer Universitas Surakarta — lab berkarya web, socmed, hardware & event, 4 proker aktif dibina mentor.",
   metadataBase: new URL("https://hmsk-unsa.ac.id"),
   openGraph: {
     title: "HMSK UNSA | Lab Berkarya Sistem Komputer UNSA",
-    description: "Bukan sekadar himpunan — lab berkarya WebCraft, LaptopCare, Hosting. Dibina mentor, output bisa dijual.",
+    description: "Bukan sekadar himpunan — lab berkarya Web Creation, SOCMED-X, RE-BOOT, VITE. Dibina mentor, output bisa dijual.",
     url: "https://hmsk-unsa.ac.id",
     siteName: "HMSK UNSA",
     locale: "id_ID",
@@ -41,6 +41,7 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image", title: "HMSK UNSA", description: "Lab berkarya Sistem Komputer UNSA" },
   alternates: { canonical: "/" },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
