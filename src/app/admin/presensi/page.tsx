@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import { MapPin, Clock, Users, Download, RefreshCw, Save, Trash2 } from "lucide-react";
 
@@ -11,34 +12,35 @@ type Kegiatan = { id: string; title: string; lokasiId: string; jamMulai: string;
 type Presensi = { id: string; nim: string; nama: string; kegiatanId: string; lat: number; lng: number; accuracy: number; jarakMeter: number; status: string; createdAt: string };
 
 export default function AdminPresensi() {
+  const router = useRouter();
   const [lokasi, setLokasi] = useState<Lokasi[]>([]);
   const [selectedLokasi, setSelectedLokasi] = useState<Lokasi | null>(null);
   const [kegiatans, setKegiatans] = useState<Kegiatan[]>([]);
   const [presensi, setPresensi] = useState<Presensi[]>([]);
-  const [now, setNow] = useState(Date.now());
+  const [now, setNow] = useState(() => Date.now());
   const [edit, setEdit] = useState<Lokasi | null>(null);
   const [newKeg, setNewKeg] = useState({ title: "", jamMulai: "", jamSelesai: "" });
   const [msg, setMsg] = useState("");
 
   const [mounted, setMounted] = useState(false);
-  const load = async () => {
+  const load = useCallback(async () => {
     const [l, k, p] = await Promise.all([fetch("/api/lokasi").then(r=>r.json()), fetch("/api/kegiatan").then(r=>r.json()), fetch("/api/presensi").then(r=>r.json())]);
-    if (Array.isArray(p) && p.length>0 && (p as unknown as {error?:string}).error) { window.location.href="/admin/login"; return; }
+    if (Array.isArray(p) && p.length>0 && (p as unknown as {error?:string}).error) { router.push("/admin/login"); return; }
     setLokasi(l); setSelectedLokasi(l[0]||null); setEdit(l[0]||null); setKegiatans(k); setPresensi(Array.isArray(p)?p:[]);
-  };
-  useEffect(()=>{ setMounted(true); load(); const t=setInterval(()=>setNow(Date.now()),1000); const poll=setInterval(load,5000); return()=>{clearInterval(t);clearInterval(poll);} }, []);
+  }, [router]);
+  useEffect(()=>{ setMounted(true); load(); const t=setInterval(()=>setNow(Date.now()),1000); const poll=setInterval(load,5000); return()=>{clearInterval(t);clearInterval(poll);} }, [load]);
 
   const saveLokasi = async () => {
     if(!edit) return;
     const r = await fetch("/api/lokasi",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(edit)});
-    if (r.status===401) { window.location.href="/admin/login"; return; }
+    if (r.status===401) { router.push("/admin/login"); return; }
     setMsg("Lokasi disimpan ✓"); load(); setTimeout(()=>setMsg(""),2000);
   };
 
   const createKegiatan = async () => {
     if(!newKeg.title || !newKeg.jamMulai || !newKeg.jamSelesai) { setMsg("Lengkapi judul & jam"); return; }
     const r = await fetch("/api/kegiatan",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({ title:newKeg.title, jamMulai:newKeg.jamMulai, jamSelesai:newKeg.jamSelesai, lokasiId: selectedLokasi?.id })});
-    if (r.status===401) { window.location.href="/admin/login"; return; }
+    if (r.status===401) { router.push("/admin/login"); return; }
     setNewKeg({title:"",jamMulai:"",jamSelesai:""}); setMsg("Kegiatan dibuat ✓"); load();
   };
 
@@ -62,7 +64,7 @@ export default function AdminPresensi() {
             <span className="font-mono text-xs bg-card border rounded-full px-3 py-2 inline-flex items-center gap-1.5" suppressHydrationWarning><Clock className="h-3.5 w-3.5"/>{mounted ? new Date(now).toLocaleString("id-ID") : "--:--:--"}</span>
             <button onClick={load} className="rounded-full border bg-card px-3 py-2 text-xs font-semibold inline-flex items-center gap-1.5 hover:bg-accent"><RefreshCw className="h-3.5 w-3.5"/> Refresh</button>
             <button onClick={exportCsv} className="rounded-full bg-primary text-primary-foreground px-4 py-2 text-xs font-bold inline-flex items-center gap-1.5"><Download className="h-3.5 w-3.5"/> Export CSV</button>
-            <button onClick={async()=>{ await fetch("/api/admin/auth",{method:"DELETE"}); window.location.href="/admin/login"; }} className="rounded-full border bg-card px-3 py-2 text-xs">Logout</button>
+            <button onClick={async()=>{ await fetch("/api/admin/auth",{method:"DELETE"}); router.push("/admin/login"); }} className="rounded-full border bg-card px-3 py-2 text-xs">Logout</button>
           </div>
         </div>
 

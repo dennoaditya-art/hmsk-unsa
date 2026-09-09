@@ -6,13 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "seed:gdrive": "tsx scripts/seed-gdrive.ts",
+    "gdrive:create-sheet": "tsx scripts/create-sheet-in-folder.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^13.2.0",
+    "googleapis": "^178.1.1",
     "leaflet": "^1.9.4",
     "lucide-react": "^1.40.0",
     "next": "16.3.4",
@@ -31,6 +34,7 @@
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.3.4",
     "tailwindcss": "^4",
+    "tsx": "^4.23.13",
     "typescript": "^5"
   }
 }

@@ -31,7 +31,13 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+.env
+.env.local
+.env.development.local
+.env.production.local
+
+# keep example
+!.env.example
 
 # vercel
 .vercel
@@ -39,8 +45,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-.vercel
 # presensi data - file-store ephemereal, jangan commit
 /data/presensi.json
 /data/presensi-ditolak.json

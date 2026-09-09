@@ -21,7 +21,7 @@ export default function PresensiPage() {
   const [watchErr, setWatchErr] = useState("");
   const [serverTime, setServerTime] = useState<number | null>(null);
   const [offset, setOffset] = useState(0);
-  const [now, setNow] = useState(Date.now());
+  const [now, setNow] = useState(() => Date.now());
   const [mounted, setMounted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState<{ type: "ok" | "err"; text: string } | null>(null);

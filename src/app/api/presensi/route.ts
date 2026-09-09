@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server";
 import { haversine } from "@/lib/geo";
-import { getLokasiById, getKegiatan, getPresensi, addPresensi } from "@/lib/presensi-store";
+import { getLokasiById, getKegiatan, getPresensi, addPresensi, addPresensiDitolak } from "@/lib/presensi-store";
 import { isValidAnggota } from "@/data/anggota";
 import { cookies, headers } from "next/headers";
-import fs from "fs";
-import path from "path";
 
 function getClientIp(h: Headers) {
   const fwd = h.get("x-forwarded-for");
@@ -12,12 +10,8 @@ function getClientIp(h: Headers) {
   return h.get("x-real-ip") || "local";
 }
 
-function saveDitolak(row: unknown) {
-  const p = path.join(process.cwd(), "data", "presensi-ditolak.json");
-  let arr: unknown[] = [];
-  try { if (fs.existsSync(p)) arr = JSON.parse(fs.readFileSync(p, "utf-8")); } catch {}
-  arr.unshift(row);
-  fs.writeFileSync(p, JSON.stringify(arr, null, 2));
+async function saveDitolak(row: unknown) {
+  await addPresensiDitolak(row as import("@/lib/presensi-store").Presensi);
 }
 
 export async function GET(req: Request) {
@@ -30,7 +24,7 @@ export async function GET(req: Request) {
   const isAdmin = c.get("admin_pin")?.value === "ok";
   if (!sessionNim && !isAdmin) return NextResponse.json({ error: "Belum login" }, { status: 401 });
 
-  const all = getPresensi();
+  const all = await getPresensi();
   if (isAdmin && !qNim) return NextResponse.json(all);
   const nim = qNim || sessionNim;
   return NextResponse.json(all.filter((p) => p.nim === nim));
@@ -60,10 +54,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: `Akurasi GPS buruk (${Math.round(acc)}m). Coba di luar ruangan / aktifkan High Accuracy.` }, { status: 400 });
   }
 
-  const kegiatan = getKegiatan().find((k) => k.id === kegiatanId) || getKegiatan().find((k) => k.isActive) || getKegiatan()[0];
+  const kegList = await getKegiatan();
+  const kegiatan = kegList.find((k) => k.id === kegiatanId) || kegList.find((k) => k.isActive) || kegList[0];
   if (!kegiatan) return NextResponse.json({ error: "Tidak ada kegiatan aktif" }, { status: 400 });
 
-  const lokasi = getLokasiById(kegiatan.lokasiId);
+  const lokasi = await getLokasiById(kegiatan.lokasiId);
   if (!lokasi) return NextResponse.json({ error: "Lokasi kegiatan tidak ditemukan" }, { status: 400 });
 
   const mulai = new Date(kegiatan.jamMulai).getTime();
@@ -82,7 +77,7 @@ export async function POST(req: Request) {
 
   // duplicate check timezone-safe: YYYY-MM-DD UTC slice
   const today = new Date(serverNow).toISOString().slice(0, 10);
-  const all = getPresensi();
+  const all = await getPresensi();
   const dup = all.find((p) => p.nim === nim && p.kegiatanId === kegiatan.id && p.createdAt.slice(0, 10) === today);
   if (dup) return NextResponse.json({ error: "Kamu sudah presensi hari ini untuk kegiatan ini" }, { status: 409 });
 
@@ -103,7 +98,7 @@ export async function POST(req: Request) {
       createdAt: new Date(serverNow).toISOString(),
       ip,
     };
-    saveDitolak(row);
+    await saveDitolak(row);
     return NextResponse.json({ error: `Di luar radius! Jarak kamu ${Math.round(jarak)}m dari ${lokasi.name} (maks ${radius}m)`, jarak: Math.round(jarak), radius, data: row }, { status: 403 });
   }
 
@@ -123,7 +118,7 @@ export async function POST(req: Request) {
     createdAt: new Date(serverNow).toISOString(),
     ip,
   };
-  addPresensi(row);
+  await addPresensi(row);
 
   return NextResponse.json({ ok: true, data: row, jarak: Math.round(jarak), serverTime: serverNow });
 }

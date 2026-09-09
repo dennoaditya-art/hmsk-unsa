@@ -8,13 +8,13 @@ async function requireAdmin() {
 }
 
 export async function GET() {
-  return NextResponse.json(getKegiatan());
+  return NextResponse.json(await getKegiatan());
 }
 
 export async function POST(req: Request) {
   if (!(await requireAdmin())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const body = await req.json();
-  const all = getKegiatan();
+  const all = await getKegiatan();
   const id = body.id || `kgt-${Date.now()}`;
   const idx = all.findIndex((k) => k.id === id);
   const row = {
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
   };
   if (idx >= 0) all[idx] = row;
   else all.unshift(row);
-  saveKegiatan(all);
+  await saveKegiatan(all);
   return NextResponse.json(row);
 }
 
@@ -36,7 +36,7 @@ export async function DELETE(req: Request) {
   const { searchParams } = new URL(req.url);
   const id = searchParams.get("id");
   if (!id) return NextResponse.json({ error: "id required" }, { status: 400 });
-  const all = getKegiatan().filter((k) => k.id !== id);
-  saveKegiatan(all);
+  const all = (await getKegiatan()).filter((k) => k.id !== id);
+  await saveKegiatan(all);
   return NextResponse.json({ ok: true });
 }
