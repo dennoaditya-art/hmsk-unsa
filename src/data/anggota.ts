@@ -7,7 +7,7 @@ export interface Anggota { nim: string; nama: string; role?: string }
 export const anggota: Anggota[] = [
   { nim: "202023009", nama: "Rossi Denno Aditya Arsenal", role: "Ketua HMSK" },
   { nim: "202323008", nama: "Sandha Anugrah Panorama", role: "Sekretaris" },
-  { nim: "202323001", nama: "Aisyah Lu'lu'ul Rohmani", role: "Bendahara" },
+  { nim: "202323001", nama: "Aisyah Lu`lu`ul Rohmani", role: "Bendahara" },
   { nim: "202423004", nama: "Een Vandicto Satya Ady", role: "Perhubungan" },
   { nim: "202323007", nama: "Petrus Guiseppie Muji Pierantoni Foel", role: "Rumah Tangga" },
 ];

@@ -31,19 +31,35 @@ function ensureFile(file: string, defaultData: unknown) {
 }
 
 const LOKASI_DEFAULT: Lokasi[] = [
-  { id: "unsa-pusat", name: "Kampus UNSA Surakarta", lat: -7.56555, lng: 110.8645, radiusMeters: 100 },
+  { id: "unsa-pusat", name: "Kampus UNSA Surakarta", lat: -7.56555, lng: 110.8645, radiusMeters: 75 },
 ];
 
-const KEGIATAN_DEFAULT: Kegiatan[] = [
-  {
-    id: "kgt-001",
-    title: "Rapat Rutin HMSK",
+// auto harian 08:00-17:00 WIB (01:00-10:00 UTC)
+export function buildTodayKegiatan(now = new Date()): Kegiatan {
+  const ymd = now.toISOString().slice(0, 10);
+  return {
+    id: `kgt-${ymd}`,
+    title: "Presensi Harian HMSK",
     lokasiId: "unsa-pusat",
-    jamMulai: new Date(new Date().setHours(8, 0, 0, 0)).toISOString(),
-    jamSelesai: new Date(new Date().setHours(17, 0, 0, 0)).toISOString(),
+    jamMulai: new Date(`${ymd}T01:00:00.000Z`).toISOString(),
+    jamSelesai: new Date(`${ymd}T10:00:00.000Z`).toISOString(),
     isActive: true,
-  },
-];
+  };
+}
+
+const KEGIATAN_DEFAULT: Kegiatan[] = [buildTodayKegiatan()];
+
+export async function ensureTodayKegiatan(): Promise<Kegiatan> {
+  const all = await getKegiatan();
+  const today = new Date().toISOString().slice(0, 10);
+  const found = all.find((k) => k.id === `kgt-${today}` || (k.isActive && k.jamMulai.slice(0, 10) === today));
+  if (found) return found;
+  const row = buildTodayKegiatan();
+  // keep history, only today active
+  const updated = [row, ...all.map((k) => ({ ...k, isActive: false }))];
+  await saveKegiatan(updated);
+  return row;
+}
 
 // ---- fs impl (dev fallback) ----
 function getLokasiFs(): Lokasi[] {

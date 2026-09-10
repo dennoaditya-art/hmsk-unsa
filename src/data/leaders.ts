@@ -36,8 +36,8 @@ export const leaders: Leader[] = [
     proker: "Administrasi",
   },
   {
-    name: "'Aisyah Lu'lu'ul Rohmani",
-    fullName: "'Aisyah Lu'lu'ul Rohmani",
+    name: "Aisyah Lu`lu`ul Rohmani",
+    fullName: "Aisyah Lu`lu`ul Rohmani",
     nim: "202323001",
     role: "Bendahara",
     shortRole: "Bendahara",

@@ -54,7 +54,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: `Akurasi GPS buruk (${Math.round(acc)}m). Coba di luar ruangan / aktifkan High Accuracy.` }, { status: 400 });
   }
 
-  const kegList = await getKegiatan();
+  let kegList = await getKegiatan();
+  // auto harian: pastikan minimal 1 kegiatan hari ini ada
+  if (!kegList.find((k) => k.isActive)) {
+    const { ensureTodayKegiatan } = await import("@/lib/presensi-store");
+    await ensureTodayKegiatan();
+    kegList = await getKegiatan();
+  }
   const kegiatan = kegList.find((k) => k.id === kegiatanId) || kegList.find((k) => k.isActive) || kegList[0];
   if (!kegiatan) return NextResponse.json({ error: "Tidak ada kegiatan aktif" }, { status: 400 });
 

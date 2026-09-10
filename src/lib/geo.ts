@@ -25,7 +25,7 @@ export const DEFAULT_LOKASI = {
   name: "Kampus UNSA Surakarta",
   lat: -7.56555,
   lng: 110.8645,
-  radiusMeters: 100,
+  radiusMeters: 75,
 };
 
 export function formatJarak(m: number) {

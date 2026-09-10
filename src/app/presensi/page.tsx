@@ -91,9 +91,12 @@ export default function PresensiPage() {
         body: JSON.stringify({ lat: pos.lat, lng: pos.lng, accuracy: pos.accuracy, kegiatanId: kegiatan.id })
       });
       const d = await res.json();
-      if (!res.ok) setMsg({ type: "err", text: d.error || "Gagal" });
-      else {
-        setMsg({ type: "ok", text: `${d.data.status === "TERLAMBAT" ? "Terlambat - tetap tercatat" : "Berhasil HADIR"} • Jarak ${d.jarak}m` });
+      if (!res.ok) {
+        // 409 = sudah absen hari ini → tampil sebagai info sukses, bukan error merah
+        if (res.status === 409) setMsg({ type: "ok", text: d.error || "Kamu sudah absen hari ini ✓" });
+        else setMsg({ type: "err", text: d.error || "Gagal" });
+      } else {
+        setMsg({ type: "ok", text: `✓ Berhasil absen — ${d.data.status === "TERLAMBAT" ? "TERLAMBAT tetap tercatat" : "HADIR"} • ${nama} • Jarak ${d.jarak}m • ${new Date(d.data.createdAt).toLocaleString("id-ID")}` });
         fetchHistory();
       }
     } finally { setLoading(false); }
@@ -107,6 +110,18 @@ export default function PresensiPage() {
 
   const serverNow = now;
   const jamStr = mounted ? new Date(serverNow).toLocaleString("id-ID", { weekday:"long", day:"2-digit", month:"long", hour:"2-digit", minute:"2-digit", second:"2-digit" }) : "--:--:--";
+  const todayStr = new Date(serverNow).toISOString().slice(0, 10);
+  // sudah absen = ada history dengan kegiatanId sama di hari ini
+  const alreadyToday = (() => {
+    if (!kegiatan || history.length === 0) return false;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (history as any[]).some((h: any) => h.kegiatanId === kegiatan.id && String(h.createdAt).slice(0, 10) === todayStr);
+  })();
+  const alreadyRow = (() => {
+    if (!alreadyToday) return null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (history as any[]).find((h: any) => h.kegiatanId === kegiatan?.id && String(h.createdAt).slice(0, 10) === todayStr) || null;
+  })();
 
   return (
     <div className="min-h-screen bg-background">
@@ -160,7 +175,7 @@ export default function PresensiPage() {
               <div className={`border-2 rounded-xl p-3 ${inRadius ? "bg-green-50 border-green-300 dark:bg-green-950/30" : "bg-card border-border"}`}>
                 <p className="text-[11px] tracking-widest font-mono text-muted-foreground">JARAK</p>
                 <p className={`text-lg font-bold ${inRadius ? "text-green-700" : "text-destructive"}`}>{jarak !== null ? formatJarak(jarak) : "—"}</p>
-                <p className="text-xs font-medium truncate">{jarak !== null ? (inRadius ? `Masuk radius ✓` : `Kurang ${jarak - (lokasi?.radiusMeters||0)}m lagi`) : `Radius ${lokasi?.radiusMeters || 100}m`}</p>
+                <p className="text-xs font-medium truncate">{jarak !== null ? (inRadius ? `Masuk radius ✓` : `Kurang ${jarak - (lokasi?.radiusMeters||0)}m lagi`) : `Radius ${lokasi?.radiusMeters || 75}m`}</p>
               </div>
               <div className={`border-2 rounded-xl p-3 ${accOk ? "bg-green-50 border-green-300 dark:bg-green-950/30" : "bg-amber-50 border-amber-200 dark:bg-amber-950/20"}`}>
                 <p className="text-[11px] tracking-widest font-mono text-muted-foreground">AKURASI</p>
@@ -200,15 +215,25 @@ export default function PresensiPage() {
               </div>
 
               {!logged && <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-xl p-3">Isi NIM & Masuk dulu sebelum absen.</p>}
+              {alreadyToday && alreadyRow ? (
+                <div className="rounded-xl p-3 text-sm border bg-green-50 border-green-200 text-green-800 dark:bg-green-950/30 flex items-start gap-2">
+                  <CheckCircle2 className="h-4 w-4 mt-0.5 shrink-0" />
+                  <div>
+                    <p className="font-bold">✓ Berhasil absen — {alreadyRow.status} ✓</p>
+                    <p className="text-xs mt-0.5 opacity-90">{alreadyRow.nama || nama} • {new Date(alreadyRow.createdAt).toLocaleString("id-ID")} • Jarak {alreadyRow.jarakMeter}m</p>
+                    <p className="text-xs mt-1">Kamu sudah absen hari ini untuk kegiatan ini. Caption ini persisten.</p>
+                  </div>
+                </div>
+              ) : null}
               {msg && <div className={`rounded-xl p-3 text-sm border ${msg.type==="ok" ? "bg-green-50 border-green-200 text-green-800 dark:bg-green-950/30" : "bg-destructive/10 border-destructive/20 text-destructive"}`}>{msg.text}</div>}
 
               <button
                 onClick={handlePresensi}
-                disabled={!logged || loading || !inRadius || !accOk}
+                disabled={!logged || loading || !inRadius || !accOk || alreadyToday}
                 className="w-full rounded-full bg-primary text-primary-foreground py-3.5 text-sm font-bold shadow hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
               >
                 {loading ? <Loader2 className="h-4 w-4 animate-spin"/> : <CheckCircle2 className="h-4 w-4"/>}
-                {loading ? "Memproses..." : "Absen Sekarang"}
+                {loading ? "Memproses..." : alreadyToday ? "Sudah Absen Hari Ini ✓" : "Absen Sekarang"}
               </button>
               <p className="text-[11px] text-center text-muted-foreground">Maps tidak bisa ditipu: validasi jarak & waktu di server, bukan di HP.</p>
             </div>

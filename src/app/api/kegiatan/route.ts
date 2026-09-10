@@ -8,6 +8,8 @@ async function requireAdmin() {
 }
 
 export async function GET() {
+  const { ensureTodayKegiatan } = await import("@/lib/presensi-store");
+  await ensureTodayKegiatan();
   return NextResponse.json(await getKegiatan());
 }
 
