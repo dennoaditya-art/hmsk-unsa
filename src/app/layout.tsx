@@ -6,17 +6,17 @@ import { Navbar } from "@/components/sections/navbar";
 import { Footer } from "@/components/sections/footer";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { MobileSticky } from "@/components/ui/mobile-sticky";
-import { Geist, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
+import { Bowlby_One_SC, Inter, JetBrains_Mono } from "next/font/google";
 
-const geist = Geist({
+const bowlby = Bowlby_One_SC({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-display",
+});
+const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-geist",
-});
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
-  variable: "--font-display",
+  variable: "--font-body",
 });
 const mono = JetBrains_Mono({
   subsets: ["latin"],
@@ -46,13 +46,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id" className={`${geist.variable} ${bricolage.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang="id" className={`${inter.variable} ${bowlby.variable} ${mono.variable}`} suppressHydrationWarning>
       <body className="antialiased pb-[96px] sm:pb-0">
+        <a
+          href="#konten"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:border focus:border-black focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-bold"
+        >
+          Lompat ke konten
+        </a>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <TooltipProvider>
             <ScrollProgress />
             <Navbar />
-            {children}
+            <div id="konten">{children}</div>
             <Footer />
             <MobileSticky />
           </TooltipProvider>

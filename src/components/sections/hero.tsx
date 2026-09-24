@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { btnEmber } from "@/lib/slush";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -24,58 +25,53 @@ export function Hero() {
         };
 
   return (
-    <section className="relative overflow-hidden bg-background">
-      <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 pt-[112px] pb-14 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24">
+    <section className="relative overflow-hidden bg-sky">
+      <div className="relative mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 pt-[100px] pb-14 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24">
         <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
-          {/* kiri: kicker, headline, subtext, CTA, fakta proker — teks, bukan kartu */}
           <div>
             <motion.span
               {...enter(0, 8)}
-              className="inline-flex items-center gap-2.5 mono text-[11px] font-bold tracking-[0.22em] text-muted-foreground"
+              className="inline-flex items-center rounded-full border border-border bg-card px-3 py-1.5 label text-[11px] text-foreground"
             >
-              <span className="h-px w-6 bg-border" />
-              HMSK UNSA · UNIVERSITAS SURAKARTA
+              HMSK UNSA • SISTEM KOMPUTER
             </motion.span>
 
             <motion.h1
               {...enter(0.06, 10)}
-              className="display mt-6 text-[44px] font-extrabold leading-[0.9] tracking-[-0.04em] text-foreground text-balance sm:text-[60px] lg:text-[72px]"
+              className="display mt-6 text-[38px] text-foreground sm:text-[54px] lg:text-[68px]"
             >
-              Sistem Komputer
+              Lab Berkarya
               <br />
-              <span className="text-primary">berkarya nyata.</span>
+              <span className="text-primary">Sistem Komputer.</span>
             </motion.h1>
 
             <motion.p
               {...enter(0.14, 10)}
-              className="mt-6 max-w-[50ch] text-[16px] leading-7 text-muted-foreground text-pretty"
+              className="mt-6 max-w-[50ch] text-[16px] leading-7 text-foreground/80 text-pretty"
             >
               Bikin website sampai jualan, servis laptop sampai buka jasa. Dibimbing mentor yang sudah di lapangan — outputnya nyata, bukan cuma teori.
             </motion.p>
 
             <motion.div {...enter(0.22, 8)} className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
-              <Link
-                href="/proker"
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground transition hover:brightness-[0.96] active:translate-y-px"
-              >
-                Lihat proker aktif <ArrowRight className="h-4 w-4" />
+              <Link href="/proker" className={btnEmber}>
+                Lihat proker aktif <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
               <Link
                 href="/struktur"
-                className="inline-flex items-center gap-1.5 border-b border-border pb-0.5 text-sm font-semibold text-foreground transition hover:border-primary hover:text-primary"
+                className="inline-flex items-center gap-1.5 border-b-2 border-foreground pb-0.5 text-sm font-bold text-foreground transition hover:border-primary hover:text-primary"
               >
-                Kenalan pengurus <ArrowUpRight className="h-3.5 w-3.5" />
+                Kenalan pengurus <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
               </Link>
             </motion.div>
 
             <motion.div
               {...enter(0.3, 8)}
-              className="mono mt-10 flex flex-col gap-3 border-t border-border pt-5 text-[12px] tracking-[0.1em] text-muted-foreground"
+              className="mt-10 flex flex-col gap-3 border-t border-border pt-5 label text-[12px] text-foreground/70"
             >
               <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
                 {prokerFacts.map((f) => (
                   <span key={f.name}>
-                    <b className="font-bold text-foreground">{f.name}</b> · {f.note}
+                    <b className="text-foreground">{f.name}</b> · {f.note}
                   </span>
                 ))}
               </div>
@@ -83,10 +79,9 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* kanan: satu foto decisif + caption — bukan nested card */}
           <motion.figure
             {...enter(0.16, 16)}
-            className="relative overflow-hidden rounded-[20px] border border-foreground/15 bg-muted"
+            className="relative overflow-hidden rounded-[20px] border border-border bg-card"
           >
             <div className="relative aspect-[16/10] overflow-hidden sm:aspect-[16/9] lg:aspect-[4/5]">
               <Image
@@ -97,9 +92,9 @@ export function Hero() {
                 sizes="(max-width: 1024px) 100vw, 560px"
                 className="object-cover object-[50%_42%]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/10 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
               <figcaption className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-6">
-                <p className="mono text-[11px] font-bold tracking-[0.18em] text-primary">KAMPUS UNSA · SURAKARTA</p>
+                <p className="label text-[11px] text-primary">KAMPUS UNSA · SURAKARTA</p>
                 <p className="mt-1.5 max-w-[38ch] text-sm leading-6">
                   Di sinilah HMSK berkarya — dari web sampai hardware.
                 </p>

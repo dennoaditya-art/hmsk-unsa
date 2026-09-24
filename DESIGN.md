@@ -1,54 +1,83 @@
-# DESIGN.md — HMSC Hybrid Kampus × Slush
+# DESIGN.md — HMSK UNSA (Slush)
 
-> Hybrid: kampus warm (amber/navy/white) untuk homepage, Slush sticker system untuk /rekrutmen.
-> Sumber: Slush Style Reference (Refero) + palette.mjs seed 60° + system kampus.
+> Sistem desain global: **Slush** (carbon/paper + neon sticker).
+> Sebelumnya hybrid kampus×Slush — sekarang Slush dipakai seragam di semua halaman publik.
+> Pengecualian: `/presensi` & `/admin/*` tetap netral/fungsional (token ikut, tapi tanpa neon/sticker dekoratif).
+
+## Register
+
+brand — situs profil himpunan. Desain adalah produknya.
+
+## Strategi warna
+
+**Committed, bukan Drenched.** Base hitam-putih, aksen ember membawa suara.
+Neon sticker dipakai **1-2 warna per halaman**, tidak pernah semua sekaligus.
+
+Aturan lama "6 sticker warna bebas" dihapus — itu penyebab halaman terasa ramai.
 
 ## Tokens
 
-### Palette — Hybrid Kampus (global)
+### Base (global)
 ```
---background: oklch(1 0 0)                // Paper White #ffffff
---foreground: oklch(0.165 0.04 272)        // Ink/navy
---card: oklch(0.99 0.008 70)
---primary: oklch(0.68 0.145 65)            // Amber honey (seed 60° ±10°)
---primary-foreground: oklch(1 0 0)         // white on amber (H-K)
---accent: oklch(0.54 0.09 192)             // teal
---border: oklch(0.92 0.012 272)
+--background: #ffffff              // paper
+--foreground: #000000              // carbon
+--card: #ffffff
+--primary: #fb4903                 // ember (aksen utama)
+--primary-foreground: #000000      // HITAM di atas ember — kontras 6.05:1
+--accent: #5c4ade                  // voltage violet
+--muted: #e9e9e9
+--muted-foreground: #5b5b5b        // kontras 6.4:1 di putih
+--border: #000000                  // tanda tangan Slush: border 1px solid #000
+--ring: #fb4903
 ```
 
-### Palette — Slush (scoped ke /rekrutmen)
+**Jangan pakai putih di atas ember** — kontras hanya 3.28:1 (gagal WCAG AA untuk teks normal).
+Ember butuh teks hitam. Aturan ini berlaku di semua tombol ember.
+
+### Palet sticker (Tailwind: `bg-sun`, `bg-mint`, `bg-electric`, `bg-lavender`, `bg-voltage`, `bg-sky`, `bg-concrete`, `bg-mist`)
 ```
---slush-carbon: #000000
---slush-paper: #ffffff
---slush-sky-wash: #dceeff
---slush-concrete: #cccccc
---slush-soft-mist: #e9e9e9
---slush-electric-blue: #4da2ff
---slush-mint-pop: #55db9c
+--slush-ember:    #fb4903
+--slush-sun:      #ffd731
+--slush-mint:     #55db9c
+--slush-blue:     #4da2ff
 --slush-lavender: #e9ccff
---slush-ember: #fb4903
---slush-sunburst: #ffd731
---slush-voltage: #5c4ade
+--slush-violet:   #5c4ade
+--slush-sky:      #dceeff
+--slush-concrete: #cccccc
+--slush-mist:     #e9e9e9
 ```
 
-### Typography
-- Display: Bricolage Grotesque 700/800 (kampus homepage, menggantikan Oswald). Slush page pakai Lateral substitute Bowlby One SC 800 line-height 0.75-0.80
-- Body/UI: Geist 400-700 + mono JetBrains 400/500
-- Slush labels: Aeonik substitute Inter 700 tracking 0.032em
+### Dark mode
+Base jadi carbon. **Permukaan terang di-invers** agar teks tetap terbaca:
+`--slush-sky: #0f1b2e`, `--slush-mist: #1a1a1a`, `--slush-sun: #3d3400`, dst.
+Tanpa ini, `bg-sky` + `text-foreground` = putih di atas biru muda (kontras 1.4:1, tidak terbaca).
 
-### Radius & Border
-- Hybrid pill/nav/buttons: 1600px (Slush) — `rounded-full` di Tailwind
-- Cards kampus: 20px (Slush) / 40px elevated
-- Border: hybrid 1px oklch di kampus, **1px solid #000** di Slush cards/buttons (outline hand-cut)
-- Shadow: hybrid ada shadow, Slush **no shadow** (flat + outline only)
+### Tipografi
+- **Display**: Bowlby One SC 400 — hanya untuk heading pendek & besar. Hanya punya weight 400; `.display` memaksa `font-weight: 400` supaya browser tidak mensintesis bold palsu.
+- **Body/UI**: Inter 400-800 (variable `--font-body`)
+- **Mono**: JetBrains Mono — hanya untuk data teknis (NIM, timestamp), bukan label marketing.
+- **`.label`**: caps + tracking 0.18em, Inter 700 — pengganti mono untuk teks marketing.
+
+### Radius, border, shadow
+- Pill: 1600px (`rounded-full`)
+- Kartu: 20px
+- **Border: 1px solid #000** di semua elemen interaktif
+- **Shadow: tidak ada.** Flat + outline adalah tanda tangan Slush.
 
 ### Layout
-- Page max: kampus 1280px, Slush 1440px
-- Section gap: 48px (Slush) / 56-80px (kampus)
-- Hero split 50/50 `grid-cols-1 lg:grid-cols-2 min-h-[100dvh] max-w-[1400]`
+- Max width: 1440px
+- Section padding: `py-14 sm:py-20 lg:py-24`
 
-## Rules
-- Slush palette (6 sticker colors) hanya di /rekrutmen — jangan sebar ke homepage (hanya Lavender boleh sebagai wash kedua jika perlu)
-- Slush Do's: crushed 0.75 leading, black 1px outline di semua interaktif, no gradient/box-shadow di Slush
-- Kampus keep shadow + amber CTAs (white text) + grid-pattern subtle
+## Aturan
 
+- Neon **1-2 warna per halaman**. Ember selalu boleh (aksen). Warna kedua pilih satu dari palet sticker.
+- Semua interaktif: border 1px hitam + radius pill.
+- Tanpa gradient dekoratif, tanpa box-shadow, tanpa glassmorphism.
+- Kontras teks ≥ 4.5:1. Ember → teks hitam.
+- `prefers-reduced-motion` wajib untuk marquee & animasi.
+- Presensi & admin: token ikut, tapi jangan tambah sticker/neon dekoratif.
+
+## Helper class
+
+`src/lib/slush.ts` — `btnInk`, `btnPaper`, `btnEmber`, `cardSlush`, `chipBase`.
+Pakai ini daripada menulis ulang `rounded-full border border-border px-6 py-3 ...` di setiap file.

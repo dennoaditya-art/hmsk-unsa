@@ -1,86 +1,75 @@
-"use client";
-import { motion } from "framer-motion";
-import { Mail, MapPin, ArrowUpRight, Sparkles } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
+import { Mail, MapPin, ArrowUpRight } from "lucide-react";
+import { btnEmber } from "@/lib/slush";
 
 export function Footer() {
   return (
-    <motion.footer initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="bg-[#020617] text-white border-t border-white/10">
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20">
-        <div className="grid gap-10 md:gap-12 lg:gap-16 md:grid-cols-12">
+    <footer className="border-t border-border bg-foreground text-background">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+        <div className="grid gap-10 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-5">
             <Link href="/" className="flex items-center gap-3">
-              <img src="/logo/logo-main.jpg" alt="HMSK UNSA" className="h-10 w-10 rounded-xl object-cover ring-1 ring-white/15" />
-              <div>
-                <p className="display text-lg font-bold tracking-tight text-white">HMSK UNSA</p>
-                <p className="mono text-[11px] tracking-[0.16em] text-white/55">SISTEM KOMPUTER • UNSA</p>
-              </div>
+              <img src="/logo/logo-main.jpg" alt="HMSK UNSA" className="h-10 w-10 rounded-[10px] object-cover border border-background" />
+              <span>
+                <span className="display block text-lg text-background">HMSK UNSA</span>
+                <span className="label block text-[9px] text-background/60">SISTEM KOMPUTER</span>
+              </span>
             </Link>
-            <p className="mt-5 max-w-sm text-sm leading-7 text-white/65">
+            <p className="mt-5 max-w-sm text-sm leading-7 text-background/70">
               Himpunan Mahasiswa Sistem Komputer Universitas Surakarta — lab berkarya: bikin website sampai jualan, service laptop sampai buka jasa.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <span className="inline-flex items-center gap-1 rounded-full bg-white/08 border border-white/10 px-3 py-1 mono text-[11px] font-semibold text-white">
-                <Sparkles className="h-3 w-3 text-primary" /> Proker Aktif
-              </span>
-              <a
-                href="https://chat.whatsapp.com/GZzZdAeNrgCG3LYiU3ULVH"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 mono text-[11px] font-bold text-white hover:bg-primary/90 transition"
-              >
-                Gabung WA Grup <ArrowUpRight className="h-3 w-3" />
-              </a>
-            </div>
+            <a
+              href="https://chat.whatsapp.com/GZzZdAeNrgCG3LYiU3ULVH"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${btnEmber} mt-6`}
+            >
+              Gabung WA Grup <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+            </a>
           </div>
 
           <div className="md:col-span-3">
-            <h3 className="mono text-[11px] tracking-[0.18em] text-white/45">KONTAK</h3>
+            <h2 className="label text-[11px] text-background/50">KONTAK</h2>
             <div className="mt-5 flex flex-col gap-4">
-              <a href="mailto:hmskunsa@gmail.com" className="flex items-center gap-2 text-sm text-white/65 hover:text-white transition">
-                <Mail className="h-4 w-4 text-primary" /> hmskunsa@gmail.com
+              <a href="mailto:hmskunsa@gmail.com" className="flex items-center gap-2 text-sm text-background/70 hover:text-background transition">
+                <Mail className="h-4 w-4" aria-hidden /> hmskunsa@gmail.com
               </a>
-              <div className="flex items-start gap-2 text-sm text-white/55">
-                <MapPin className="h-4 w-4 mt-0.5 text-primary" />
+              <div className="flex items-start gap-2 text-sm text-background/70">
+                <MapPin className="h-4 w-4 mt-0.5" aria-hidden />
                 <span>Universitas Surakarta, Jawa Tengah</span>
               </div>
             </div>
           </div>
 
-          <div className="md:col-span-2">
-            <h3 className="mono text-[11px] tracking-[0.18em] text-white/45">NAVIGASI</h3>
+          <nav className="md:col-span-2" aria-label="Navigasi footer">
+            <h2 className="label text-[11px] text-background/50">NAVIGASI</h2>
             <div className="mt-4 flex flex-col gap-2.5">
-              <Link href="/" className="text-sm text-white/65 hover:text-white">Beranda</Link>
-              <Link href="/proker" className="text-sm text-white/65 hover:text-white">Proker</Link>
-              <Link href="/struktur" className="text-sm text-white/65 hover:text-white">Struktur Pengurus</Link>
-              <Link href="/tentang" className="text-sm text-white/65 hover:text-white">Tentang Kami</Link>
+              <Link href="/" className="text-sm text-background/70 hover:text-background">Beranda</Link>
+              <Link href="/proker" className="text-sm text-background/70 hover:text-background">Proker</Link>
+              <Link href="/struktur" className="text-sm text-background/70 hover:text-background">Struktur Pengurus</Link>
+              <Link href="/tentang" className="text-sm text-background/70 hover:text-background">Tentang Kami</Link>
             </div>
-          </div>
+          </nav>
 
           <div className="md:col-span-2">
-            <h3 className="mono text-[11px] tracking-[0.18em] text-white/45">PROKER</h3>
-            <div className="mt-4 flex flex-col gap-2.5 text-sm">
-              <span className="text-white/65">• Web Creation</span>
-              <span className="text-white/65">• SOCMED-X</span>
-              <span className="text-white/65">• RE-BOOT</span>
-              <span className="text-white/50">• VITE (Segera)</span>
+            <h2 className="label text-[11px] text-background/50">PROKER</h2>
+            <div className="mt-4 flex flex-col gap-2.5 text-sm text-background/70">
+              <span>Web Creation</span>
+              <span>SOCMED-X</span>
+              <span>RE-BOOT</span>
+              <span className="text-background/50">VITE (Segera)</span>
             </div>
-            <Link href="/proker" className="mt-4 inline-flex items-center gap-1 mono text-xs font-bold tracking-widest text-primary hover:text-white">
-              LIHAT SEMUA <ArrowUpRight className="h-3 w-3" />
+            <Link href="/proker" className="mt-4 inline-flex items-center gap-1 label text-xs text-primary hover:text-background">
+              LIHAT SEMUA <ArrowUpRight className="h-3 w-3" aria-hidden />
             </Link>
           </div>
         </div>
 
-        <Separator className="my-10 bg-white/10" />
-
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-          <p className="mono text-xs tracking-wide text-white/45">© {new Date().getFullYear()} HMSK UNSA — Sistem Komputer UNSA. Dibina dengan praktek, bukan wacana.</p>
-          <div className="flex items-center gap-2 mono text-xs text-white/35">
-            <span className="h-2 w-2 rounded-full bg-primary animate-pulse" /> SYSTEM ONLINE
-          </div>
+        <div className="mt-10 border-t border-background/20 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-background/50">© {new Date().getFullYear()} HMSK UNSA — Sistem Komputer UNSA.</p>
+          <p className="label text-[11px] text-background/50">UNIVERSITAS SURAKARTA</p>
         </div>
       </div>
-    </motion.footer>
+    </footer>
   );
 }

@@ -20,80 +20,105 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-ember: var(--slush-ember);
+  --color-sun: var(--slush-sun);
+  --color-mint: var(--slush-mint);
+  --color-electric: var(--slush-blue);
+  --color-lavender: var(--slush-lavender);
+  --color-voltage: var(--slush-violet);
+  --color-sky: var(--slush-sky);
+  --color-concrete: var(--slush-concrete);
+  --color-mist: var(--slush-mist);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
 }
 
-/* Kampus nuance — pure white bg + amber honey (oklch 0.68 0.145 65, seed 60°) + navy ink
-   Strategy: Committed hero split — amber carries voice on white, navy drenched accents
-   H-K rule: white text on saturated amber fills */
+/* ==========================================================================
+   SLUSH — sistem desain global HMSK UNSA
+   Base carbon #000 + paper #fff. Neon dipakai 1-2 warna per halaman.
+   Tanda tangan: border 1px solid #000, radius pill, flat (tanpa shadow).
+   ========================================================================== */
 :root {
   --radius: 0.5rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.165 0.04 272);
-  --card: oklch(0.99 0.008 70);
-  --card-foreground: oklch(0.165 0.04 272);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.165 0.04 272);
-  --primary: oklch(0.68 0.145 65);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.96 0.015 272);
-  --secondary-foreground: oklch(0.165 0.04 272);
-  --muted: oklch(0.96 0.015 272);
-  --muted-foreground: oklch(0.52 0.032 268);
-  --accent: oklch(0.54 0.09 192);
-  --accent-foreground: oklch(1 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.92 0.012 272);
-  --input: oklch(0.92 0.012 272);
-  --ring: oklch(0.68 0.145 65);
-  --navy: oklch(0.165 0.04 272);
-  --navy-light: oklch(0.28 0.035 272);
-  --ink: oklch(0.165 0.04 272);
-  --ink-light: oklch(0.52 0.032 268);
-  --paper: oklch(1 0 0);
-  --paper-muted: oklch(0.96 0.015 272);
-  --stone: oklch(0.52 0.032 268);
-  --font-geist: "Geist", sans-serif;
-  --font-display: "Bricolage Grotesque", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+
+  /* ember = aksen utama. Teks di atasnya WAJIB hitam (6.05:1). */
+  --primary: #fb4903;
+  --primary-foreground: #000000;
+
+  --secondary: #e9e9e9;
+  --secondary-foreground: #000000;
+  --muted: #e9e9e9;
+  --muted-foreground: #5b5b5b;
+  --accent: #5c4ade;
+  --accent-foreground: #ffffff;
+  --destructive: #d4183d;
+
+  --border: #000000;
+  --input: #000000;
+  --ring: #fb4903;
+
+  /* Palet sticker — pakai 1-2 per halaman, jangan semua sekaligus */
+  --slush-ember: #fb4903;
+  --slush-sun: #ffd731;
+  --slush-mint: #55db9c;
+  --slush-blue: #4da2ff;
+  --slush-lavender: #e9ccff;
+  --slush-violet: #5c4ade;
+  --slush-sky: #dceeff;
+  --slush-concrete: #cccccc;
+  --slush-mist: #e9e9e9;
+  --slush-carbon: #000000;
+  --slush-paper: #ffffff;
+
+  --font-display: "Bowlby One SC", ui-sans-serif, system-ui;
+  --font-body: "Inter", ui-sans-serif, system-ui;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 .dark {
-  --background: oklch(0.14 0.035 272);
-  --foreground: oklch(0.98 0.005 70);
-  --card: oklch(0.19 0.03 272);
-  --card-foreground: oklch(0.98 0.005 70);
-  --popover: oklch(0.19 0.03 272);
-  --popover-foreground: oklch(0.98 0.005 70);
-  --primary: oklch(0.72 0.13 65);
-  --primary-foreground: oklch(0.14 0.035 272);
-  --secondary: oklch(0.22 0.025 272);
-  --secondary-foreground: oklch(0.98 0.005 70);
-  --muted: oklch(0.22 0.025 272);
-  --muted-foreground: oklch(0.68 0.03 268);
-  --accent: oklch(0.62 0.085 192);
-  --accent-foreground: oklch(0.14 0.035 272);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.72 0.13 65);
-  --navy: oklch(0.98 0.005 70);
-  --navy-light: oklch(0.68 0.03 268);
-  --ink: oklch(0.98 0.005 70);
-  --ink-light: oklch(0.68 0.03 268);
-  --paper: oklch(0.19 0.03 272);
-  --paper-muted: oklch(0.22 0.025 272);
-  --stone: oklch(0.68 0.03 268);
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #0a0a0a;
+  --card-foreground: #ffffff;
+  --popover: #0a0a0a;
+  --popover-foreground: #ffffff;
+  --primary: #fb4903;
+  --primary-foreground: #000000;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #ffffff;
+  --muted: #1a1a1a;
+  --muted-foreground: #a3a3a3;
+  --accent: #7c6ef5;
+  --accent-foreground: #000000;
+  --border: #ffffff;
+  --input: #ffffff;
+  --ring: #fb4903;
+
+  /* Permukaan terang di-invers agar teks tetap terbaca di dark mode.
+     Ember & neon lain tetap (aksen brand). */
+  --slush-sky: #0f1b2e;
+  --slush-mist: #1a1a1a;
+  --slush-concrete: #1a1a1a;
+  --slush-lavender: #241a33;
+  --slush-sun: #3d3400;
+  --slush-mint: #0f2e1e;
+  --slush-blue: #10305a;
 }
 
 * { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
 * { border-color: var(--border); }
 
 body {
-  font-family: var(--font-geist);
+  font-family: var(--font-body);
   background: var(--background);
   color: var(--foreground);
   -webkit-font-smoothing: antialiased;
@@ -102,50 +127,36 @@ body {
 }
 
 section { scroll-margin-top: 5rem; }
-.accent-text { color: var(--primary); }
 
-.gradient-bg-dark {
-  background: radial-gradient(1100px 560px at 70% -10%, oklch(0.68 0.145 65 / 0.12), transparent 60%),
-    radial-gradient(860px 480px at 10% 100%, oklch(0.62 0.085 192 / 0.08), transparent 60%),
-    linear-gradient(180deg, oklch(0.14 0.035 272) 0%, oklch(0.09 0.03 272) 100%);
+/* Bowlby One SC hanya punya weight 400 — paksa, jangan biarkan browser
+   mensintesis bold. Dipakai hanya untuk display pendek & besar. */
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.85;
+  text-transform: uppercase;
 }
-
-.grid-pattern {
-  background-image:
-    linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 32px 32px;
-  opacity: 0.35;
-}
-.grid-pattern-dark {
-  background-image:
-    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
-  background-size: 32px 32px;
-}
-
 .mono { font-family: var(--font-mono); }
-.display { font-family: var(--font-display); }
 
-/* Slush scoped — only inside .slush */
-.slush {
-  --slush-carbon: #000000;
-  --slush-paper: #ffffff;
-  --slush-sky: #dceeff;
-  --slush-concrete: #cccccc;
-  --slush-mist: #e9e9e9;
-  --slush-blue: #4da2ff;
-  --slush-mint: #55db9c;
-  --slush-lavender: #e9ccff;
-  --slush-ember: #fb4903;
-  --slush-sun: #ffd731;
-  --slush-violet: #5c4ade;
-  --font-lateral: 'Bowlby One SC', 'Bowlby One', ui-sans-serif, system-ui;
-  --font-aeonik: 'Inter', ui-sans-serif, system-ui;
+/* Label caps bertracking ala Slush — pengganti mono untuk teks marketing */
+.label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 
-@keyframes reveal { from { transform: translateY(18px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { [class*="animate-[reveal"] { animation: none !important; opacity: 1 !important; transform: none !important; } }
+/* Pill — radius tanda tangan Slush */
+.pill { border-radius: 1600px; }
+
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes blink { 50% { opacity: 0; } }
+
 .text-balance { text-wrap: balance; }
 .text-pretty { text-wrap: pretty; }
-@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+
+@media (prefers-reduced-motion: reduce) {
+  [class*="animate-[marquee"] { animation: none !important; }
+  * { scroll-behavior: auto !important; }
+}
