@@ -9,6 +9,7 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const links = [
   { href: "/", label: "Beranda", icon: Home },
+  { href: "/rekrutmen", label: "Rekrutmen", icon: Sparkles },
   { href: "/presensi", label: "Presensi", icon: MapPin },
   { href: "/tentang", label: "Tentang", icon: Info },
   { href: "/proker", label: "Proker", icon: Sparkles },

@@ -6,17 +6,17 @@ import { Navbar } from "@/components/sections/navbar";
 import { Footer } from "@/components/sections/footer";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { MobileSticky } from "@/components/ui/mobile-sticky";
-import { Geist, Oswald, JetBrains_Mono } from "next/font/google";
+import { Geist, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 
 const geist = Geist({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-geist",
 });
-const oswald = Oswald({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-oswald",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-display",
 });
 const mono = JetBrains_Mono({
   subsets: ["latin"],
@@ -46,8 +46,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id" className={`${geist.variable} ${oswald.variable} ${mono.variable}`} suppressHydrationWarning>
-      <body className="antialiased pb-[76px] sm:pb-0">
+    <html lang="id" className={`${geist.variable} ${bricolage.variable} ${mono.variable}`} suppressHydrationWarning>
+      <body className="antialiased pb-[96px] sm:pb-0">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <TooltipProvider>
             <ScrollProgress />
