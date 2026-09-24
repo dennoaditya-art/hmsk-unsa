@@ -37,7 +37,7 @@ const statusBadge = (status: string) => {
 export default function AboutPage() {
   return (
     <main className="pt-[72px]">
-      <section className="bg-sky border-b border-border">
+      <section className="surface-mist border-b border-border">
         <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
           <Link href="/" className="inline-flex items-center gap-1.5 label text-xs text-foreground/60 hover:text-foreground">
             <ArrowLeft className="h-3.5 w-3.5" aria-hidden /> KEMBALI KE BERANDA
@@ -59,10 +59,10 @@ export default function AboutPage() {
           <div className="lg:col-span-7 rounded-[20px] border border-border bg-foreground p-7 sm:p-10 text-background relative overflow-hidden">
             <div className="relative">
               <span className="inline-flex items-center gap-2 rounded-full border border-background/40 px-3 py-1.5 label text-[11px]">
-                <Sparkles className="h-3 w-3 text-primary" aria-hidden /> VISI
+                <Sparkles className="h-3 w-3 text-primary-text" aria-hidden /> VISI
               </span>
               <div className="mt-6 flex gap-3">
-                <Quote className="h-6 w-6 text-primary shrink-0" aria-hidden />
+                <Quote className="h-6 w-6 text-primary-text shrink-0" aria-hidden />
                 <p className="text-lg leading-7 font-medium text-balance">{orgProfile.vision}</p>
               </div>
             </div>
@@ -92,7 +92,7 @@ export default function AboutPage() {
                   {iconMap[p.icon] ?? <Globe className="h-5 w-5" aria-hidden />}
                 </div>
                 <h3 className="mt-4 text-base font-bold text-foreground">{p.title}</h3>
-                <p className="label text-[11px] text-primary">{mentorLabel[p.id] ?? p.mentor.toUpperCase()}</p>
+                <p className="label text-[11px] text-primary-text">{mentorLabel[p.id] ?? p.mentor.toUpperCase()}</p>
                 <p className="mt-3 text-sm leading-6 text-muted-foreground flex-1">{p.description}</p>
                 <div className="mt-4 flex flex-wrap gap-1.5">
                   {p.highlights.map((h) => (

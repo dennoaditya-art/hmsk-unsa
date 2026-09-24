@@ -26,7 +26,7 @@ export default function RekrutmenPage() {
       </div>
 
       {/* HERO — sky wash + ember. 2 warna saja. */}
-      <section className="relative overflow-hidden border-b border-border bg-sky">
+      <section className="relative overflow-hidden border-b border-border surface-mist">
         <div className="relative mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           <div className="mx-auto max-w-[1100px] text-center">
             <span className="inline-flex items-center rounded-full border border-border bg-card px-3 py-1.5 label text-[11px] text-foreground">
@@ -60,12 +60,12 @@ export default function RekrutmenPage() {
               <h2 className="display mt-3 text-[34px] text-foreground sm:text-[48px]">
                 Tiga langkah,
                 <br />
-                <span className="text-primary">langsung jalan.</span>
+                <span className="text-primary-text">langsung jalan.</span>
               </h2>
               <ol className="mt-8 flex flex-col gap-5">
                 {steps.map((s) => (
                   <li key={s.n} className="flex gap-4 border-t border-border pt-5">
-                    <span className="display text-2xl shrink-0 text-primary">{s.n}</span>
+                    <span className="display text-2xl shrink-0 text-primary-text">{s.n}</span>
                     <div>
                       <p className="font-bold text-foreground">{s.t}</p>
                       <p className="mt-0.5 text-sm leading-6 text-muted-foreground">{s.d}</p>

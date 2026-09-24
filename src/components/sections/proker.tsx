@@ -41,7 +41,7 @@ export function Proker() {
             <h2 className="display mt-3 text-[30px] text-foreground sm:text-[42px]">
               Belajar yang
               <br />
-              <span className="text-primary">Menghasilkan.</span>
+              <span className="text-primary-text">Menghasilkan.</span>
             </h2>
           </motion.div>
           <motion.div variants={fadeUp} className="max-w-[460px]">

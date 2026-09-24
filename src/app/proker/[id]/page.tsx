@@ -43,7 +43,7 @@ export default async function ProkerDetail({ params }: { params: Promise<{ id: s
             <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-background bg-primary text-primary-foreground">{iconMap[p.icon] ?? <Sparkles className="h-6 w-6" aria-hidden />}</div>
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-background/40 px-3 py-1 label text-[11px]">
-                <Sparkles className="h-3 w-3 text-primary" aria-hidden /> {p.status.toUpperCase()} • {p.shortTitle.toUpperCase()}
+                <Sparkles className="h-3 w-3 text-primary-text" aria-hidden /> {p.status.toUpperCase()} • {p.shortTitle.toUpperCase()}
               </span>
               <h1 className="display mt-3 text-[28px] text-background sm:text-[38px]">{p.title}</h1>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-background/75">{p.description}</p>
@@ -52,7 +52,7 @@ export default async function ProkerDetail({ params }: { params: Promise<{ id: s
           <div className="mt-6 flex flex-wrap gap-2">
             {p.highlights.map((h) => (
               <span key={h} className="inline-flex items-center gap-1 rounded-full border border-background/40 bg-background px-3 py-1.5 text-xs font-bold text-foreground">
-                <Check className="h-3 w-3 text-primary" aria-hidden /> {h}
+                <Check className="h-3 w-3 text-primary-text" aria-hidden /> {h}
               </span>
             ))}
           </div>
@@ -104,7 +104,7 @@ export default async function ProkerDetail({ params }: { params: Promise<{ id: s
                 </div>
               </div>
               <div className="mt-4 flex items-center gap-1.5 label text-xs">
-                {p.status === "berjalan" ? <><Zap className="h-3.5 w-3.5 text-primary" aria-hidden /> <span className="text-foreground">Berjalan</span></> : <><Clock3 className="h-3.5 w-3.5 text-muted-foreground" aria-hidden /> <span className="text-muted-foreground">Segera</span></>}
+                {p.status === "berjalan" ? <><Zap className="h-3.5 w-3.5 text-primary-text" aria-hidden /> <span className="text-foreground">Berjalan</span></> : <><Clock3 className="h-3.5 w-3.5 text-muted-foreground" aria-hidden /> <span className="text-muted-foreground">Segera</span></>}
               </div>
             </div>
 
@@ -112,7 +112,7 @@ export default async function ProkerDetail({ params }: { params: Promise<{ id: s
               <p className="label text-[11px] text-muted-foreground">PROKER LAIN</p>
               <div className="mt-3 space-y-2">
                 {other.map((o) => (
-                  <Link key={o.id} href={`/proker/${o.id}`} className="flex items-center justify-between rounded-xl border border-border bg-card px-3 py-3 transition hover:bg-sky">
+                  <Link key={o.id} href={`/proker/${o.id}`} className="flex items-center justify-between rounded-xl border border-border bg-card px-3 py-3 transition hover:surface-mist">
                     <div className="flex items-center gap-2">
                       <span className="h-2 w-2 rounded-full bg-primary" />
                       <span className="text-sm font-bold text-foreground">{o.shortTitle}</span>

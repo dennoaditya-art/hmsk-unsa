@@ -59,7 +59,7 @@ export function Footer() {
               <span>RE-BOOT</span>
               <span className="text-background/50">VITE (Segera)</span>
             </div>
-            <Link href="/proker" className="mt-4 inline-flex items-center gap-1 label text-xs text-primary hover:text-background">
+            <Link href="/proker" className="mt-4 inline-flex items-center gap-1 label text-xs text-primary-text hover:text-background">
               LIHAT SEMUA <ArrowUpRight className="h-3 w-3" aria-hidden />
             </Link>
           </div>

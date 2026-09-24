@@ -7,7 +7,7 @@ import { btnEmber, btnPaper, cardSlush } from "@/lib/slush";
 export default function StructurePage() {
   return (
     <main className="pt-[72px]">
-      <section className="relative overflow-hidden border-b border-border bg-sky">
+      <section className="relative overflow-hidden border-b border-border surface-mist">
         <div className="relative mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
           <Link href="/" className="inline-flex items-center gap-1.5 label text-xs text-foreground/60 hover:text-foreground">
             <ArrowLeft className="h-3.5 w-3.5" aria-hidden /> KEMBALI KE BERANDA
@@ -15,7 +15,7 @@ export default function StructurePage() {
           <div className="mt-6 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 label text-[11px] text-foreground">
-                <Crown className="h-3 w-3 text-primary" aria-hidden /> STRUKTUR PENGURUS
+                <Crown className="h-3 w-3 text-primary-text" aria-hidden /> STRUKTUR PENGURUS
               </span>
               <h1 className="display mt-4 text-[32px] text-foreground sm:text-[46px]">Struktur Pengurus</h1>
               <p className="mt-3 max-w-xl text-sm leading-6 text-foreground/75">
@@ -34,7 +34,7 @@ export default function StructurePage() {
       <section className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 py-10 sm:py-14 bg-background">
         <div className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto">
           {leaders.map((leader, idx) => (
-            <article key={leader.name} className={`${cardSlush} p-6 sm:p-8 ${idx === 0 ? "md:col-span-2 bg-sky" : ""}`}>
+            <article key={leader.name} className={`${cardSlush} p-6 sm:p-8 ${idx === 0 ? "md:col-span-2 surface-mist" : ""}`}>
               <div className="flex flex-col sm:flex-row gap-6">
                 <div className={`flex h-20 w-20 sm:h-24 sm:w-24 shrink-0 items-center justify-center rounded-[20px] overflow-hidden border border-border ${leader.image ? "bg-card" : "bg-foreground text-background text-2xl font-bold"}`}>
                   {leader.image ? (
@@ -54,7 +54,7 @@ export default function StructurePage() {
                     )}
                   </div>
                   <h2 className={`display mt-3 text-foreground leading-tight break-words ${leader.name.length > 28 ? "text-xl sm:text-2xl" : leader.name.length > 22 ? "text-[22px] sm:text-2xl" : "text-2xl"}`}>{leader.name}</h2>
-                  {leader.nim && <p className="label text-[11px] text-primary mt-1">NIM {leader.nim}</p>}
+                  {leader.nim && <p className="label text-[11px] text-primary-text mt-1">NIM {leader.nim}</p>}
                   <p className="mt-2 text-sm leading-6 text-muted-foreground">{leader.description}</p>
 
                   {leader.proker && prokers.find((p) => p.shortTitle === leader.proker) && (
@@ -66,10 +66,10 @@ export default function StructurePage() {
 
                   <div className="mt-5 grid gap-2">
                     <a href="mailto:hmskunsa@gmail.com" className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition">
-                      <Mail className="h-3.5 w-3.5 text-primary" aria-hidden /> hmskunsa@gmail.com
+                      <Mail className="h-3.5 w-3.5 text-primary-text" aria-hidden /> hmskunsa@gmail.com
                     </a>
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <MapPin className="h-3.5 w-3.5 text-primary" aria-hidden /> Universitas Surakarta, Jawa Tengah
+                      <MapPin className="h-3.5 w-3.5 text-primary-text" aria-hidden /> Universitas Surakarta, Jawa Tengah
                     </div>
                   </div>
                 </div>

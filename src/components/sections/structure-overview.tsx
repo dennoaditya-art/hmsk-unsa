@@ -27,7 +27,7 @@ export function StructureOverview() {
 
         <div className="mt-10">
           <motion.div initial={{ opacity: 0, y: 20, scale: 0.97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} className="mx-auto max-w-[420px]">
-            <div className="flex justify-center items-center gap-2 label text-[11px] text-primary mb-3">
+            <div className="flex justify-center items-center gap-2 label text-[11px] text-primary-text mb-3">
               <motion.span animate={shouldReduce ? {} : { rotate: [0, 8, -6, 0] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} className="flex">
                 <Crown className="h-3.5 w-3.5" aria-hidden />
               </motion.span>

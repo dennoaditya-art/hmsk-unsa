@@ -129,11 +129,11 @@ export default function PresensiPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 bg-card border rounded-2xl p-4 sm:p-5 shadow-sm">
           <div>
-            <h1 className="display text-xl sm:text-2xl font-bold tracking-tight flex items-center gap-2"><MapPin className="h-6 w-6 text-primary"/> Presensi HMSK</h1>
+            <h1 className="display text-xl sm:text-2xl font-bold tracking-tight flex items-center gap-2"><MapPin className="h-6 w-6 text-primary-text"/> Presensi HMSK</h1>
             <p className="text-xs sm:text-sm text-muted-foreground mt-1">Maps realtime • Validasi server • Anti fake GPS</p>
           </div>
           <div className="flex items-center gap-2 text-xs font-mono bg-background border rounded-full px-3.5 py-2.5 shrink-0">
-            <Clock className="h-3.5 w-3.5 text-primary"/><span className="font-semibold" suppressHydrationWarning>{jamStr}</span>
+            <Clock className="h-3.5 w-3.5 text-primary-text"/><span className="font-semibold" suppressHydrationWarning>{jamStr}</span>
           </div>
         </div>
 
@@ -195,7 +195,7 @@ export default function PresensiPage() {
           {/* Form */}
           <div className="space-y-4">
             <div className="bg-card border rounded-2xl p-5 shadow-sm space-y-4">
-              <h3 className="font-bold flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-primary"/> Validasi Realtime</h3>
+              <h3 className="font-bold flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-primary-text"/> Validasi Realtime</h3>
               <div>
                 <label className="text-xs font-semibold">Kegiatan</label>
                 <select value={kegiatan?.id || ""} onChange={e=>setKegiatan(kegiatans.find(k=>k.id===e.target.value)||null)} className="mt-1 w-full rounded-xl border bg-background px-3 py-2.5 text-sm">

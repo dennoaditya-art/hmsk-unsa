@@ -14,7 +14,7 @@ export function LeaderCard({ leader, variant = "default" }: { leader: Leader; va
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className={cn(
         "group relative overflow-hidden rounded-[20px] border border-border bg-card",
-        isKetua && "bg-sky"
+        isKetua && "surface-mist"
       )}
     >
       <div className="p-5 sm:p-6">
@@ -41,14 +41,14 @@ export function LeaderCard({ leader, variant = "default" }: { leader: Leader; va
           {leader.nim && <p className="text-[10px] font-bold tracking-[0.12em] text-foreground/60 mt-0.5">NIM {leader.nim}</p>}
           {leader.proker && (
             <span className="mt-2 inline-flex items-center gap-1 rounded-full border border-border bg-card px-2 py-1 text-[10px] font-bold text-foreground">
-              <Sparkles className="h-3 w-3 text-primary" aria-hidden /> {leader.proker}
+              <Sparkles className="h-3 w-3 text-primary-text" aria-hidden /> {leader.proker}
             </span>
           )}
         </div>
 
         <p className="mt-3 text-xs leading-5 text-muted-foreground line-clamp-3">{leader.description}</p>
 
-        <Link href="/struktur" className={cn("mt-4 inline-flex items-center gap-1 label text-xs", isKetua ? "text-primary hover:text-foreground" : "text-foreground hover:text-primary")}>
+        <Link href="/struktur" className={cn("mt-4 inline-flex items-center gap-1 label text-xs", isKetua ? "text-primary-text hover:text-foreground" : "text-foreground hover:text-primary-text")}>
           Lihat profil <ArrowUpRight className="h-3 w-3" aria-hidden />
         </Link>
       </div>

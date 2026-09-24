@@ -21,7 +21,7 @@ export default function ProkerPage() {
 
   return (
     <main className="pt-[72px]">
-      <section className="relative overflow-hidden border-b border-border bg-sky">
+      <section className="relative overflow-hidden border-b border-border surface-mist">
         <div className="relative mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
           <Link href="/" className="inline-flex items-center gap-1.5 label text-xs text-foreground/60 hover:text-foreground">
             <ArrowLeft className="h-3.5 w-3.5" aria-hidden /> KEMBALI KE BERANDA
@@ -29,7 +29,7 @@ export default function ProkerPage() {
           <div className="mt-8 flex flex-col lg:flex-row lg:items-end justify-between gap-8 lg:gap-12">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 label text-[11px] text-foreground">
-                <Sparkles className="h-3 w-3 text-primary" aria-hidden /> PROKER UNGGULAN
+                <Sparkles className="h-3 w-3 text-primary-text" aria-hidden /> PROKER UNGGULAN
               </span>
               <h1 className="display mt-4 text-[32px] text-foreground sm:text-[46px]">
                 Proker HMSK UNSA

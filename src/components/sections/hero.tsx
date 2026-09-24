@@ -25,7 +25,7 @@ export function Hero() {
         };
 
   return (
-    <section className="relative overflow-hidden bg-sky">
+    <section className="relative overflow-hidden bg-background">
       <div className="relative mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 pt-[100px] pb-14 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24">
         <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
           <div>
@@ -42,7 +42,7 @@ export function Hero() {
             >
               Lab Berkarya
               <br />
-              <span className="text-primary">Sistem Komputer.</span>
+              <span className="text-primary-text">Sistem Komputer.</span>
             </motion.h1>
 
             <motion.p
@@ -58,7 +58,7 @@ export function Hero() {
               </Link>
               <Link
                 href="/struktur"
-                className="inline-flex items-center gap-1.5 border-b-2 border-foreground pb-0.5 text-sm font-bold text-foreground transition hover:border-primary hover:text-primary"
+                className="inline-flex items-center gap-1.5 border-b-2 border-foreground pb-0.5 text-sm font-bold text-foreground transition hover:border-primary hover:text-primary-text"
               >
                 Kenalan pengurus <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
               </Link>
@@ -94,7 +94,7 @@ export function Hero() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
               <figcaption className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-6">
-                <p className="label text-[11px] text-primary">KAMPUS UNSA · SURAKARTA</p>
+                <p className="label text-[11px] text-primary-text">KAMPUS UNSA · SURAKARTA</p>
                 <p className="mt-1.5 max-w-[38ch] text-sm leading-6">
                   Di sinilah HMSK berkarya — dari web sampai hardware.
                 </p>

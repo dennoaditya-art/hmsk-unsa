@@ -57,7 +57,7 @@ export default function AdminPresensi() {
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 pt-[88px] sm:pt-[96px] pb-6 space-y-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="display text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-2"><Users className="h-7 w-7 text-primary"/> Admin Presensi</h1>
+            <h1 className="display text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-2"><Users className="h-7 w-7 text-primary-text"/> Admin Presensi</h1>
             <p className="text-sm text-muted-foreground">Atur titik & radius • Live peta presensi • Realtime server</p>
           </div>
           <div className="flex items-center gap-2">
@@ -73,7 +73,7 @@ export default function AdminPresensi() {
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Lokasi editor */}
           <div className="bg-card border rounded-2xl p-5 space-y-4">
-            <h3 className="font-bold flex items-center gap-2"><MapPin className="h-4 w-4 text-primary"/> Titik & Radius Absen</h3>
+            <h3 className="font-bold flex items-center gap-2"><MapPin className="h-4 w-4 text-primary-text"/> Titik & Radius Absen</h3>
             {edit && (
               <div className="space-y-3">
                 <div>
@@ -145,7 +145,7 @@ export default function AdminPresensi() {
                     <td className="p-3 text-xs">{p.kegiatanId}</td>
                     <td className="p-3 font-mono text-xs">{p.jarakMeter}m • {p.accuracy}m</td>
                     <td className="p-3"><span className={`rounded-full px-2.5 py-1 text-xs font-bold ${p.status==="HADIR"?"bg-green-100 text-green-700":p.status==="TERLAMBAT"?"bg-amber-100 text-amber-700":"bg-red-100 text-red-700"}`}>{p.status}</span></td>
-                    <td className="p-3"><a target="_blank" href={`https://www.google.com/maps?q=${p.lat},${p.lng}`} className="text-primary underline text-xs">Lihat Maps</a></td>
+                    <td className="p-3"><a target="_blank" href={`https://www.google.com/maps?q=${p.lat},${p.lng}`} className="text-primary-text underline text-xs">Lihat Maps</a></td>
                   </tr>
                 ))}
                 {presensi.length===0 && <tr><td colSpan={6} className="p-8 text-center text-sm text-muted-foreground">Belum ada yang absen.</td></tr>}

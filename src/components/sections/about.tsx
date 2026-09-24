@@ -28,10 +28,10 @@ export function About() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} whileHover={shouldReduce ? undefined : { y: -4 }} className="lg:col-span-7 rounded-[20px] border border-border bg-foreground text-background overflow-hidden relative p-7 sm:p-10">
             <div className="relative">
               <span className="inline-flex items-center gap-2 rounded-full border border-background/40 px-3 py-1.5 label text-[11px]">
-                <Sparkles className="h-3 w-3 text-primary" aria-hidden /> VISI KAMI
+                <Sparkles className="h-3 w-3 text-primary-text" aria-hidden /> VISI KAMI
               </span>
               <div className="mt-6 flex gap-3">
-                <Quote className="h-7 w-7 text-primary shrink-0" aria-hidden />
+                <Quote className="h-7 w-7 text-primary-text shrink-0" aria-hidden />
                 <p className="text-[17px] sm:text-[19px] leading-7 font-medium text-balance">&ldquo;{orgProfile.vision}&rdquo;</p>
               </div>
               <div className="mt-8 flex items-center gap-3">
@@ -67,7 +67,7 @@ export function About() {
               <div className="lg:w-[320px] shrink-0">
                 <h3 className="display text-xl text-foreground">Misi Kami</h3>
                 <p className="mt-3 text-sm leading-6 text-muted-foreground">Empat pilar yang jadi kompas setiap proker HMSK. Dieksekusi, bukan ditempel di dinding.</p>
-                <a href="/tentang" className="mt-5 inline-flex items-center gap-1.5 label text-xs text-primary hover:text-foreground">
+                <a href="/tentang" className="mt-5 inline-flex items-center gap-1.5 label text-xs text-primary-text hover:text-foreground">
                   SELENGKAPNYA <ArrowUpRight className="h-3 w-3" aria-hidden />
                 </a>
               </div>
