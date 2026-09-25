@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import { isGDriveEnabled, getSheetId, readSheetRaw } from "@/lib/gdrive";
 import { cookies } from "next/headers";
+import { verifyToken } from "@/lib/admin-session";
 
 export async function GET() {
   const c = await cookies();
-  if (c.get("admin_pin")?.value !== "ok") return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!verifyToken(c.get("admin_pin")?.value)) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const enabled = isGDriveEnabled();
   if (!enabled) {
     return NextResponse.json({
