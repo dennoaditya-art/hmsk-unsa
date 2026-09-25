@@ -27,7 +27,8 @@ export async function GET(req: Request) {
 
   const all = await getPresensi();
   if (isAdmin && !qNim) return NextResponse.json(all);
-  const nim = qNim || sessionNim;
+  // ponytail: non-admin hanya boleh lihat miliknya sendiri; qNim diabaikan (cegah IDOR)
+  const nim = isAdmin ? qNim || sessionNim : sessionNim;
   return NextResponse.json(all.filter((p) => p.nim === nim));
 }
 
