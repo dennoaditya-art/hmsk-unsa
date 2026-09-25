@@ -1,48 +1,52 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { isValidAnggota, findAnggota } from "@/data/anggota";
-import { isGDriveEnabled } from "@/lib/gdrive";
+import { findAnggota } from "@/data/anggota";
+import { getAnggotaByNim } from "@/lib/presensi-store";
+import { verifyPassword } from "@/lib/password";
+import { createMemberToken, verifyMemberToken, isSessionConfigured } from "@/lib/member-session";
+
+const COOKIE_NIM = "hmsk_nim";
+const COOKIE_NAMA = "hmsk_nama";
 
 export async function POST(req: Request) {
-  const { nim, nama } = await req.json();
+  const { nim, password } = await req.json();
   const nimTrim = (nim || "").trim();
-  const namaTrim = (nama || "").trim();
+  const pw = (password || "").trim();
   if (!nimTrim || nimTrim.length < 3) return NextResponse.json({ error: "NIM wajib" }, { status: 400 });
-  if (!namaTrim || namaTrim.length < 3) return NextResponse.json({ error: "Nama wajib (min 3 huruf)" }, { status: 400 });
-  if (namaTrim.toLowerCase() === nimTrim.toLowerCase()) return NextResponse.json({ error: "Nama tidak boleh sama dengan NIM" }, { status: 400 });
-  // cek allowlist: hardcode + sheet anggota jika GDrive aktif
-  let anggota = findAnggota(nimTrim);
-  if (!anggota && isGDriveEnabled()) {
-    try {
-      const { getAnggotaSheet } = await import("@/lib/presensi-store.sheets");
-      const sheetAnggota = await getAnggotaSheet();
-      const hit = sheetAnggota.find((a) => a.nim.trim() === nimTrim);
-      if (hit && hit.nama.trim().toLowerCase() === namaTrim.toLowerCase()) {
-        anggota = { nim: hit.nim, nama: hit.nama, role: hit.role };
-      } else if (hit) {
-        return NextResponse.json({ error: `Nama tidak cocok dengan NIM ${nimTrim} (cek Sheet anggota)` }, { status: 403 });
-      }
-    } catch {}
+  if (!pw) return NextResponse.json({ error: "Password wajib" }, { status: 400 });
+
+  if (!isSessionConfigured()) {
+    return NextResponse.json({ error: "Server belum dikonfigurasi (SESSION_SECRET/ADMIN_PIN kosong)" }, { status: 500 });
   }
-  if (!anggota) return NextResponse.json({ error: "NIM tidak terdaftar (hubungi admin HMSK)" }, { status: 403 });
-  if (!isValidAnggota(nimTrim, namaTrim) && !(anggota && anggota.nama.trim().toLowerCase() === namaTrim.toLowerCase())) return NextResponse.json({ error: `Nama tidak cocok dengan NIM ${nimTrim} (cek allowlist)` }, { status: 403 });
+
+  const row = await getAnggotaByNim(nimTrim);
+  const fallback = findAnggota(nimTrim);
+  const hash = row?.passwordHash;
+  const nama = row?.nama || fallback?.nama || "";
+
+  if (!nama) return NextResponse.json({ error: "NIM tidak terdaftar (hubungi admin HMSK)" }, { status: 403 });
+  if (!hash) {
+    return NextResponse.json({ error: "Password belum di-set. Hubungi admin HMSK untuk aktivasi." }, { status: 403 });
+  }
+  if (!verifyPassword(pw, hash)) return NextResponse.json({ error: "Password salah" }, { status: 401 });
+
   const c = await cookies();
   const secure = process.env.NODE_ENV === "production";
-  c.set("hmsk_nim", nimTrim, { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 12, secure });
-  c.set("hmsk_nama", namaTrim, { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 12, secure });
-  return NextResponse.json({ ok: true });
+  c.set(COOKIE_NIM, createMemberToken(nimTrim), { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 12, secure });
+  c.set(COOKIE_NAMA, nama, { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 12, secure });
+  return NextResponse.json({ ok: true, nim: nimTrim, nama });
 }
 
 export async function DELETE() {
   const c = await cookies();
-  c.delete("hmsk_nim");
-  c.delete("hmsk_nama");
+  c.delete(COOKIE_NIM);
+  c.delete(COOKIE_NAMA);
   return NextResponse.json({ ok: true });
 }
 
 export async function GET() {
   const c = await cookies();
-  const nim = c.get("hmsk_nim")?.value || null;
-  const nama = c.get("hmsk_nama")?.value || null;
-  return NextResponse.json({ nim, nama });
+  const nim = verifyMemberToken(c.get(COOKIE_NIM)?.value);
+  const nama = c.get(COOKIE_NAMA)?.value || null;
+  return NextResponse.json({ nim, nama: nim ? nama : null });
 }

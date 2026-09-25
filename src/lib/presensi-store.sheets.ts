@@ -22,7 +22,7 @@ const LOKASI_HEADERS = ["id", "name", "lat", "lng", "radiusMeters"];
 const KEGIATAN_HEADERS = ["id", "title", "lokasiId", "jamMulai", "jamSelesai", "isActive"];
 const PRESENSI_HEADERS = ["id", "nim", "nama", "kegiatanId", "lat", "lng", "accuracy", "jarakMeter", "status", "alasan", "createdAt", "ip"];
 const PRESENSI_DITOLAK_HEADERS = PRESENSI_HEADERS;
-const ANGGOTA_HEADERS = ["nim", "nama", "role"];
+const ANGGOTA_HEADERS = ["nim", "nama", "role", "password_hash"];
 
 // ponytail: sheets no transaction, duplicate checked at app layer. Cache 30s via gdrive.ts.
 
@@ -124,13 +124,18 @@ export async function getLokasiById(id: string) {
 }
 
 // anggota sheet
-export async function getAnggotaSheet(): Promise<{nim:string,nama:string,role?:string}[]> {
+export async function getAnggotaSheet(): Promise<{nim:string,nama:string,role?:string,passwordHash?:string}[]> {
   if (!isGDriveEnabled()) return [];
   try {
     const rows = await readSheetRaw("anggota");
     if (rows.length <= 1) return [];
-    return rows.slice(1).map((r) => ({ nim: r[0]||"", nama: r[1]||"", role: r[2]||"" })).filter((x)=>x.nim);
+    return rows.slice(1).map((r) => ({ nim: r[0]||"", nama: r[1]||"", role: r[2]||"", passwordHash: r[3]||undefined })).filter((x)=>x.nim);
   } catch { return []; }
+}
+
+export async function saveAnggotaSheet(data: {nim:string,nama:string,role?:string,passwordHash?:string}[]) {
+  if (!isGDriveEnabled()) throw new Error("GDrive disabled");
+  await writeSheet("anggota", [ANGGOTA_HEADERS, ...data.map((a) => [a.nim, a.nama, a.role || "", a.passwordHash || ""])]);
 }
 
 export { LOKASI_HEADERS, KEGIATAN_HEADERS, PRESENSI_HEADERS, PRESENSI_DITOLAK_HEADERS, ANGGOTA_HEADERS };

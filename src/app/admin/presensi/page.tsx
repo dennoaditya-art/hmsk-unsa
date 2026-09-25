@@ -10,6 +10,7 @@ const PresensiMap = dynamic(() => import("@/components/maps/presensi-map").then(
 type Lokasi = { id: string; name: string; lat: number; lng: number; radiusMeters: number };
 type Kegiatan = { id: string; title: string; lokasiId: string; jamMulai: string; jamSelesai: string; isActive: boolean };
 type Presensi = { id: string; nim: string; nama: string; kegiatanId: string; lat: number; lng: number; accuracy: number; jarakMeter: number; status: string; createdAt: string };
+type Anggota = { nim: string; nama: string; role?: string; hasPassword: boolean };
 
 export default function AdminPresensi() {
   const router = useRouter();
@@ -17,6 +18,9 @@ export default function AdminPresensi() {
   const [selectedLokasi, setSelectedLokasi] = useState<Lokasi | null>(null);
   const [kegiatans, setKegiatans] = useState<Kegiatan[]>([]);
   const [presensi, setPresensi] = useState<Presensi[]>([]);
+  const [anggotas, setAnggotas] = useState<Anggota[]>([]);
+  const [newPw, setNewPw] = useState<Record<string, string>>({});
+  const [shownPw, setShownPw] = useState<{ nim: string; nama: string; password: string } | null>(null);
   const [now, setNow] = useState(() => Date.now());
   const [edit, setEdit] = useState<Lokasi | null>(null);
   const [newKeg, setNewKeg] = useState({ title: "", jamMulai: "", jamSelesai: "" });
@@ -24,9 +28,10 @@ export default function AdminPresensi() {
 
   const [mounted, setMounted] = useState(false);
   const load = useCallback(async () => {
-    const [l, k, p] = await Promise.all([fetch("/api/lokasi").then(r=>r.json()), fetch("/api/kegiatan").then(r=>r.json()), fetch("/api/presensi").then(r=>r.json())]);
+    const [l, k, p, a] = await Promise.all([fetch("/api/lokasi").then(r=>r.json()), fetch("/api/kegiatan").then(r=>r.json()), fetch("/api/presensi").then(r=>r.json()), fetch("/api/admin/anggota").then(r=>r.json())]);
     if (!Array.isArray(p)) { router.push("/admin/login"); return; }
     setLokasi(l); setSelectedLokasi(l[0]||null); setEdit(l[0]||null); setKegiatans(k); setPresensi(p);
+    setAnggotas(Array.isArray(a) ? a : []);
   }, [router]);
   useEffect(()=>{ setMounted(true); load(); const t=setInterval(()=>setNow(Date.now()),1000); const poll=setInterval(load,5000); return()=>{clearInterval(t);clearInterval(poll);} }, [load]);
 
@@ -42,6 +47,18 @@ export default function AdminPresensi() {
     const r = await fetch("/api/kegiatan",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({ title:newKeg.title, jamMulai:newKeg.jamMulai, jamSelesai:newKeg.jamSelesai, lokasiId: selectedLokasi?.id })});
     if (r.status===401) { router.push("/admin/login"); return; }
     setNewKeg({title:"",jamMulai:"",jamSelesai:""}); setMsg("Kegiatan dibuat ✓"); load();
+  };
+
+  const setPassword = async (nim: string) => {
+    const pw = (newPw[nim] || "").trim();
+    const r = await fetch("/api/admin/anggota", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ nim, password: pw || undefined }) });
+    if (r.status === 401) { router.push("/admin/login"); return; }
+    const d = await r.json();
+    if (!r.ok) { setMsg(d.error || "Gagal set password"); return; }
+    const a = anggotas.find((x) => x.nim === nim);
+    setShownPw({ nim, nama: a?.nama || "", password: d.password });
+    setNewPw((s) => ({ ...s, [nim]: "" }));
+    setMsg("Password diset ✓"); load();
   };
 
   const esc = (v: string) => `"${String(v).replace(/"/g,'""')}"`;
@@ -69,6 +86,15 @@ export default function AdminPresensi() {
         </div>
 
         {msg && <div className="rounded-xl bg-green-50 border border-green-200 text-green-800 text-sm p-3">{msg}</div>}
+
+        {shownPw && (
+          <div className="rounded-2xl border-2 border-primary bg-card p-4 space-y-2">
+            <p className="text-sm font-bold">Password baru untuk {shownPw.nama} ({shownPw.nim})</p>
+            <p className="font-mono text-lg bg-muted rounded-xl px-4 py-3 select-all">{shownPw.password}</p>
+            <p className="text-xs text-muted-foreground">Catat & kirim ke anggota via DM. Password ini tidak bisa ditampilkan lagi.</p>
+            <button onClick={() => setShownPw(null)} className="rounded-full border bg-card px-4 py-2 text-xs font-semibold">Tutup</button>
+          </div>
+        )}
 
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Lokasi editor */}
@@ -123,6 +149,39 @@ export default function AdminPresensi() {
               </div>
               <button onClick={createKegiatan} className="w-full rounded-full bg-primary text-primary-foreground py-2.5 text-sm font-bold">Buat Kegiatan</button>
             </div>
+          </div>
+        </div>
+
+        {/* Kelola Password Anggota */}
+        <div className="bg-card border rounded-2xl p-5 space-y-4">
+          <div>
+            <h3 className="font-bold">Password Anggota</h3>
+            <p className="text-xs text-muted-foreground">Kosongkan input untuk generate password acak. Password lama langsung tidak berlaku.</p>
+          </div>
+          <div className="overflow-auto">
+            <table className="w-full text-sm">
+              <thead className="text-xs text-muted-foreground">
+                <tr><th className="text-left p-2">NIM</th><th className="text-left p-2">Nama</th><th className="text-left p-2">Status</th><th className="text-left p-2">Password Baru</th><th className="p-2"></th></tr>
+              </thead>
+              <tbody>
+                {anggotas.map((a) => (
+                  <tr key={a.nim} className="border-t">
+                    <td className="p-2 font-mono text-xs">{a.nim}</td>
+                    <td className="p-2 text-xs">{a.nama}</td>
+                    <td className="p-2">
+                      <span className={`rounded-full px-2 py-0.5 text-[11px] font-bold ${a.hasPassword ? "bg-green-100 text-green-700" : "bg-amber-100 text-amber-700"}`}>{a.hasPassword ? "AKTIF" : "BELUM SET"}</span>
+                    </td>
+                    <td className="p-2">
+                      <input type="text" value={newPw[a.nim] || ""} onChange={(e) => setNewPw((s) => ({ ...s, [a.nim]: e.target.value }))} placeholder="(acak)" className="w-full min-w-[140px] rounded-lg border bg-background px-2.5 py-1.5 text-xs"/>
+                    </td>
+                    <td className="p-2">
+                      <button onClick={() => setPassword(a.nim)} className="whitespace-nowrap rounded-full bg-primary text-primary-foreground px-3 py-1.5 text-xs font-bold">Set</button>
+                    </td>
+                  </tr>
+                ))}
+                {anggotas.length === 0 && <tr><td colSpan={5} className="p-6 text-center text-sm text-muted-foreground">Belum ada anggota.</td></tr>}
+              </tbody>
+            </table>
           </div>
         </div>
 

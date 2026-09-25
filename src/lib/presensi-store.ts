@@ -3,8 +3,7 @@ import path from "path";
 import { isGDriveEnabled } from "./gdrive";
 import { isWebhookEnabled } from "./gdrive-webhook";
 
-export type Lokasi = { id: string; name: string; lat: number; lng: number; radiusMeters: number };
-export type Kegiatan = { id: string; title: string; lokasiId: string; jamMulai: string; jamSelesai: string; isActive: boolean };
+export type Lokasi = { id: string; name: string; lat: number; lng: number; radiusMeters: number };export type Kegiatan = { id: string; title: string; lokasiId: string; jamMulai: string; jamSelesai: string; isActive: boolean };
 export type Presensi = {
   id: string;
   nim: string;
@@ -173,6 +172,37 @@ export async function getPresensiDitolak(): Promise<Presensi[]> {
   const p = path.join(dataDir, "presensi-ditolak.json");
   try { if (fs.existsSync(p)) return JSON.parse(fs.readFileSync(p, "utf-8")); } catch {}
   return [];
+}
+
+// ---- anggota (allowlist + password hash) ----
+export type AnggotaRow = { nim: string; nama: string; role?: string; passwordHash?: string };
+
+function getAnggotaFs(): AnggotaRow[] {
+  const p = ensureFile("anggota.json", []);
+  try { return JSON.parse(fs.readFileSync(p, "utf-8")); } catch { return []; }
+}
+function saveAnggotaFs(data: AnggotaRow[]) {
+  const p = ensureFile("anggota.json", []);
+  fs.writeFileSync(p, JSON.stringify(data, null, 2));
+}
+
+export async function getAnggota(): Promise<AnggotaRow[]> {
+  if (isGDriveEnabled()) {
+    const m = await import("./presensi-store.sheets");
+    return m.getAnggotaSheet();
+  }
+  return getAnggotaFs();
+}
+export async function saveAnggota(data: AnggotaRow[]) {
+  if (isGDriveEnabled()) {
+    const m = await import("./presensi-store.sheets");
+    return m.saveAnggotaSheet(data);
+  }
+  return saveAnggotaFs(data);
+}
+export async function getAnggotaByNim(nim: string): Promise<AnggotaRow | undefined> {
+  const all = await getAnggota();
+  return all.find((a) => a.nim === nim.trim());
 }
 
 // sync aliases for backward compat (if someone still calls without await)

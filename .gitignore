@@ -48,5 +48,6 @@ next-env.d.ts
 # presensi data - file-store ephemereal, jangan commit
 /data/presensi.json
 /data/presensi-ditolak.json
+/data/anggota.json
 dev.log
 cookies.txt

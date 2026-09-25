@@ -16,6 +16,7 @@ export default function PresensiPage() {
   const [kegiatans, setKegiatans] = useState<Kegiatan[]>([]);
   const [nim, setNim] = useState("");
   const [nama, setNama] = useState("");
+  const [password, setPassword] = useState("");
   const [logged, setLogged] = useState(false);
   const [pos, setPos] = useState<{ lat: number; lng: number; accuracy: number } | null>(null);
   const [watchErr, setWatchErr] = useState("");
@@ -72,13 +73,15 @@ export default function PresensiPage() {
 
   const handleLogin = async () => {
     if (!nim.trim()) { setMsg({ type: "err", text: "NIM wajib diisi" }); return; }
-    if (!nama.trim() || nama.trim().length < 3) { setMsg({ type: "err", text: "Nama wajib diisi (min 3 huruf)" }); return; }
-    const res = await fetch("/api/auth", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ nim: nim.trim(), nama: nama.trim() }) });
-    if (!res.ok) { const d = await res.json(); setMsg({ type: "err", text: d.error || "Gagal login" }); return; }
-    setLogged(true); setMsg({ type: "ok", text: `Login sebagai ${nama.trim()} (${nim.trim()})` });
+    if (!password) { setMsg({ type: "err", text: "Password wajib diisi" }); return; }
+    const res = await fetch("/api/auth", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ nim: nim.trim(), password }) });
+    const d = await res.json().catch(() => ({}));
+    if (!res.ok) { setMsg({ type: "err", text: d.error || "Gagal login" }); return; }
+    setNama(d.nama || ""); setPassword(""); setLogged(true);
+    setMsg({ type: "ok", text: `Login sebagai ${d.nama || nim.trim()} (${nim.trim()})` });
   };
   const handleLogout = async () => {
-    await fetch("/api/auth", { method: "DELETE" }); setLogged(false); setNim(""); setNama("");
+    await fetch("/api/auth", { method: "DELETE" }); setLogged(false); setNim(""); setNama(""); setPassword("");
   };
 
   const handlePresensi = async () => {
@@ -143,11 +146,11 @@ export default function PresensiPage() {
             <div className="flex flex-col sm:flex-row gap-3 items-end">
               <div className="flex-1 w-full">
                 <label className="text-xs font-semibold">NIM <span className="text-destructive">*</span></label>
-                <input value={nim} onChange={e=>setNim(e.target.value)} placeholder="2024230xx" required className="mt-1 w-full rounded-xl border bg-background px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary/20"/>
+                <input value={nim} onChange={e=>setNim(e.target.value)} placeholder="2024230xx" required autoComplete="username" className="mt-1 w-full rounded-xl border bg-background px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary/20"/>
               </div>
               <div className="flex-1 w-full">
-                <label className="text-xs font-semibold">Nama Lengkap <span className="text-destructive">*</span></label>
-                <input value={nama} onChange={e=>setNama(e.target.value)} placeholder="Nama sesuai NIM" required className="mt-1 w-full rounded-xl border bg-background px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary/20"/>
+                <label className="text-xs font-semibold">Password <span className="text-destructive">*</span></label>
+                <input type="password" value={password} onChange={e=>setPassword(e.target.value)} onKeyDown={e=>e.key==="Enter"&&handleLogin()} placeholder="Password akun HMSK" required autoComplete="current-password" className="mt-1 w-full rounded-xl border bg-background px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary/20"/>
               </div>
               <button onClick={handleLogin} className="w-full sm:w-auto rounded-full bg-primary text-primary-foreground px-6 py-2.5 text-sm font-bold hover:bg-primary/90">Masuk</button>
             </div>

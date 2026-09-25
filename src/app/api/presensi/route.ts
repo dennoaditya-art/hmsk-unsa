@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import { haversine } from "@/lib/geo";
-import { getLokasiById, getKegiatan, getPresensi, addPresensi, addPresensiDitolak } from "@/lib/presensi-store";
-import { isValidAnggota } from "@/data/anggota";
+import { getLokasiById, getKegiatan, getPresensi, addPresensi, addPresensiDitolak, getAnggotaByNim } from "@/lib/presensi-store";
+import { findAnggota } from "@/data/anggota";
 import { cookies, headers } from "next/headers";
 import { verifyToken } from "@/lib/admin-session";
+import { verifyMemberToken } from "@/lib/member-session";
 
 function getClientIp(h: Headers) {
   const fwd = h.get("x-forwarded-for");
@@ -17,7 +18,7 @@ async function saveDitolak(row: unknown) {
 
 export async function GET(req: Request) {
   const c = await cookies();
-  const sessionNim = c.get("hmsk_nim")?.value;
+  const sessionNim = verifyMemberToken(c.get("hmsk_nim")?.value);
   const { searchParams } = new URL(req.url);
   const qNim = searchParams.get("nim");
 
@@ -38,14 +39,15 @@ export async function POST(req: Request) {
   const { lat, lng, accuracy, kegiatanId } = body;
 
   const c = await cookies();
-  const nim = c.get("hmsk_nim")?.value;
-  const rawNama = (c.get("hmsk_nama")?.value || body.nama || "").trim();
-  const nama = rawNama;
+  const nim = verifyMemberToken(c.get("hmsk_nim")?.value);
 
-  if (!nim) return NextResponse.json({ error: "Belum login. Isi NIM dulu." }, { status: 401 });
-  if (!nama || nama.length < 3) return NextResponse.json({ error: "Nama wajib (min 3 huruf)" }, { status: 400 });
-  if (nama.toLowerCase() === nim.toLowerCase()) return NextResponse.json({ error: "Nama tidak boleh sama dengan NIM" }, { status: 400 });
-  if (!isValidAnggota(nim, nama)) return NextResponse.json({ error: "NIM+Nama tidak cocok allowlist (identitas asli)" }, { status: 403 });
+  if (!nim) return NextResponse.json({ error: "Belum login. Isi NIM & password dulu." }, { status: 401 });
+
+  // nama otoritatif dari allowlist, bukan dari cookie/body (cegah spoof)
+  const anggota = await getAnggotaByNim(nim);
+  const fallback = findAnggota(nim);
+  const nama = (anggota?.nama || fallback?.nama || "").trim();
+  if (!nama) return NextResponse.json({ error: "NIM tidak terdaftar (hubungi admin HMSK)" }, { status: 403 });
   if (typeof lat !== "number" || typeof lng !== "number" || Number.isNaN(lat) || Number.isNaN(lng))
     return NextResponse.json({ error: "Lokasi tidak valid" }, { status: 400 });
   if (lat < -90 || lat > 90 || lng < -180 || lng > 180)
