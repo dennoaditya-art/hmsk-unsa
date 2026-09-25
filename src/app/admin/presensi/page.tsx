@@ -25,8 +25,8 @@ export default function AdminPresensi() {
   const [mounted, setMounted] = useState(false);
   const load = useCallback(async () => {
     const [l, k, p] = await Promise.all([fetch("/api/lokasi").then(r=>r.json()), fetch("/api/kegiatan").then(r=>r.json()), fetch("/api/presensi").then(r=>r.json())]);
-    if (Array.isArray(p) && p.length>0 && (p as unknown as {error?:string}).error) { router.push("/admin/login"); return; }
-    setLokasi(l); setSelectedLokasi(l[0]||null); setEdit(l[0]||null); setKegiatans(k); setPresensi(Array.isArray(p)?p:[]);
+    if (!Array.isArray(p)) { router.push("/admin/login"); return; }
+    setLokasi(l); setSelectedLokasi(l[0]||null); setEdit(l[0]||null); setKegiatans(k); setPresensi(p);
   }, [router]);
   useEffect(()=>{ setMounted(true); load(); const t=setInterval(()=>setNow(Date.now()),1000); const poll=setInterval(load,5000); return()=>{clearInterval(t);clearInterval(poll);} }, [load]);
 

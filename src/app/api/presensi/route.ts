@@ -3,6 +3,7 @@ import { haversine } from "@/lib/geo";
 import { getLokasiById, getKegiatan, getPresensi, addPresensi, addPresensiDitolak } from "@/lib/presensi-store";
 import { isValidAnggota } from "@/data/anggota";
 import { cookies, headers } from "next/headers";
+import { verifyToken } from "@/lib/admin-session";
 
 function getClientIp(h: Headers) {
   const fwd = h.get("x-forwarded-for");
@@ -21,7 +22,7 @@ export async function GET(req: Request) {
   const qNim = searchParams.get("nim");
 
   // Hanya izinkan lihat presensi milik sendiri, kecuali admin
-  const isAdmin = c.get("admin_pin")?.value === "ok";
+  const isAdmin = verifyToken(c.get("admin_pin")?.value);
   if (!sessionNim && !isAdmin) return NextResponse.json({ error: "Belum login" }, { status: 401 });
 
   const all = await getPresensi();

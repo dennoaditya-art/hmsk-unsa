@@ -17,7 +17,7 @@ export default function AdminLogin() {
     <div className="min-h-screen grid place-items-center bg-background p-4 pt-[88px]">
       <div className="w-full max-w-sm bg-card border rounded-2xl p-6 space-y-4">
         <h1 className="font-bold text-lg flex items-center gap-2"><ShieldCheck className="h-5 w-5 text-primary-text"/> Admin HMSK</h1>
-        <p className="text-sm text-muted-foreground">PIN default: <code className="font-mono bg-muted px-1.5 py-0.5 rounded">hmsk2025</code> — ganti di env <code>ADMIN_PIN</code></p>
+        <p className="text-sm text-muted-foreground">Masukkan PIN admin untuk mengelola presensi.</p>
         <input type="password" value={pin} onChange={e=>setPin(e.target.value)} onKeyDown={e=>e.key==="Enter"&&submit()} placeholder="Masukkan PIN admin" className="w-full rounded-xl border bg-background px-3 py-2.5 text-sm"/>
         {err && <p className="text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded-xl p-2">{err}</p>}
         <button onClick={submit} className="w-full rounded-full bg-primary text-primary-foreground py-2.5 text-sm font-bold">Masuk Admin</button>

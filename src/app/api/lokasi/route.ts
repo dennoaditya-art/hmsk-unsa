@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import { getLokasi, saveLokasi } from "@/lib/presensi-store";
 import { cookies } from "next/headers";
+import { verifyToken } from "@/lib/admin-session";
 
 async function requireAdmin() {
   const c = await cookies();
-  return c.get("admin_pin")?.value === "ok";
+  return verifyToken(c.get("admin_pin")?.value);
 }
 
 export async function GET() {
