@@ -52,10 +52,9 @@ export const leaders: Leader[] = [
     nim: "202423004",
     role: "Perhubungan",
     shortRole: "Perhubungan",
-    description: "Menjalin kerja sama eksternal, publikasi & branding HMSK UNSA, serta pembina RE-BOOT — repair, optimize & overhaul training.",
+    description: "Menjalin kerja sama eksternal, publikasi & branding HMSK UNSA.",
     color: "from-primary via-violet-600 to-primary",
     accent: "primary",
-    proker: "RE-BOOT",
   },
   {
     name: "Petrus Guiseppie Muji Pierantoni Foel",

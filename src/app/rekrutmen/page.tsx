@@ -46,7 +46,7 @@ export default function RekrutmenPage() {
                 Lihat Proker <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
             </div>
-            <p className="mt-4 label text-[11px] text-foreground/60">4 LAB AKTIF • 50+ MAHASISWA • 3 MENTOR</p>
+            <p className="mt-4 label text-[11px] text-foreground/60">4 LAB AKTIF • 50+ MAHASISWA • 1 MENTOR + TIM HMSK</p>
           </div>
         </div>
       </section>

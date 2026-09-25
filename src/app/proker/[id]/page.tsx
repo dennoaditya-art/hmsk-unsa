@@ -64,16 +64,16 @@ export default async function ProkerDetail({ params }: { params: Promise<{ id: s
           <div className={`lg:col-span-8 ${cardSlush} p-7 sm:p-10`}>
             <h2 className="display text-xl text-foreground">Tentang Program</h2>
             <p className="mt-3 text-sm leading-7 text-muted-foreground">
-              {p.id === "web-creation" && "Kamu akan belajar dari nol: desain Figma, slicing Tailwind, Next.js, deploy, sampai teknik jualan ke UMKM. Setiap peserta wajib ship 1 website klien nyata sebagai portfolio."}
+              {p.id === "web-creation" && "Kamu akan belajar vibe coding dari nol: nulis prompt yang tepat, pakai AI buat generate & refactor kode, review hasilnya, slicing Tailwind + Next.js, deploy, sampai teknik jualan ke UMKM. Fundamental tetap diajarkan — AI itu alat, bukan pengganti pemahaman. Setiap peserta wajib ship 1 website klien nyata sebagai portfolio."}
               {p.id === "socmed-x" && "Pelatihan socmed hands-on: strategi konten, copywriting, desain feed, Meta Ads, dan analitik. Cocok untuk yang mau handle sosmed UMKM/brand dan jadi freelance social media specialist."}
               {p.id === "re-boot" && "Pelatihan hardware hands-on: bongkar, cleaning, repasta, diagnosa kerusakan umum, hingga strategi buka jasa service di kampus. Cocok untuk yang suka ngoprek."}
               {p.id === "vite" && "Fokus deployment & event tech: domain, cPanel, hosting, SSL, serta pembuatan undangan digital VITE yang responsive, RSVP online, dan manajemen tamu."}
             </p>
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {[
-                { t: "Output", d: p.id === "web-creation" ? "1 website klien live + portfolio" : p.id === "socmed-x" ? "Portfolio socmed + campaign live" : p.id === "re-boot" ? "Bisa buka jasa cleaning/service" : "Link undangan VITE siap share" },
+                { t: "Output", d: p.id === "web-creation" ? "1 website klien live + prompt playbook" : p.id === "socmed-x" ? "Portfolio socmed + campaign live" : p.id === "re-boot" ? "Bisa buka jasa cleaning/service" : "Link undangan VITE siap share" },
                 { t: "Durasi", d: p.status === "segera" ? "Akan diumumkan" : "4-6 minggu intensif" },
-                { t: "Level", d: "Pemula welcome" },
+                { t: "Level", d: p.id === "web-creation" ? "Pemula welcome • AI-assisted" : "Pemula welcome" },
                 { t: "Sertifikat", d: "E-certificate HMSK" },
               ].map((x) => (
                 <div key={x.t} className="rounded-2xl border border-border bg-muted p-4">

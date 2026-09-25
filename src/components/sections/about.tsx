@@ -47,7 +47,7 @@ export function About() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="lg:col-span-5 grid gap-5">
             {[
               { icon: Code2, title: "Teknologi Terapan", desc: "Belajar yang langsung dipakai: website, sosmed, hardware, hingga undangan digital — bukan hafalan." },
-              { icon: Users, title: "Mentoring Senior", desc: "Dibimbing Mas Denno (Web Creation), Dicto (RE-BOOT) & Tim HMSK (SOCMED-X/VITE) — belajar bareng, praktek bareng." },
+              { icon: Users, title: "Mentoring Senior", desc: "Dibimbing Mas Denno (Web Creation) & Tim HMSK (RE-BOOT, SOCMED-X, VITE) — belajar bareng, praktek bareng." },
               { icon: Target, title: "Berorientasi Hasil", desc: "Output nyata: website terjual, sosmed growth, jasa service jalan, undangan VITE live." },
             ].map((v) => (
               <motion.div key={v.title} variants={scaleIn} whileHover={shouldReduce ? undefined : { y: -4 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className={`${cardSlush} p-6 flex gap-5`}>

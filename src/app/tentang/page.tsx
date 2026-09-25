@@ -14,7 +14,7 @@ const iconMap: Record<string, React.ReactNode> = {
 const mentorLabel: Record<string, string> = {
   "web-creation": "ROSSI DENNO ADITYA ARSENAL",
   "socmed-x": "TIM HMSK",
-  "re-boot": "EEN VANDICTO SATYA ADY",
+  "re-boot": "TIM HMSK",
   vite: "TIM HMSK • NEXT MEET",
 };
 

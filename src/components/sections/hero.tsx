@@ -75,7 +75,7 @@ export function Hero() {
                   </span>
                 ))}
               </div>
-              <div>50+ mahasiswa · 4 proker aktif · 3 mentor</div>
+              <div>50+ mahasiswa · 4 proker aktif · 1 mentor + Tim HMSK</div>
             </motion.div>
           </div>
 
